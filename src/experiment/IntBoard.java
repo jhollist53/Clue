@@ -49,6 +49,9 @@ public class IntBoard {
 		targets = new HashSet<BoardCell>();
 		visited.add(cell);
 		findAllTargets(cell, num);
+		if(targets.contains(cell)){
+			targets.remove(cell);
+		}
 	}
 	
 	private void findAllTargets(BoardCell startCell, int length){

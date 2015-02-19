@@ -1,0 +1,9 @@
+
+#Ignore emacs backup files.
+*~
+
+#Ignore eclipse files/directories
+.classpath
+.project
+.settings/
+bin/

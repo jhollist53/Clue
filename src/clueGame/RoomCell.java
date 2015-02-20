@@ -6,6 +6,13 @@ public class RoomCell extends BoardCell {
 	public DoorDirection doorDirection;
 	private char roomInitial;
 	
+	public RoomCell(int x, int y, char roomInitial, DoorDirection door){
+		this.x = x;
+		this.y = y;
+		this.roomInitial = roomInitial;
+		this.doorDirection = door;
+	}
+	
 	@Override
 	public boolean isRoom () {
 		return true;

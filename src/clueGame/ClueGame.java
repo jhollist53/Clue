@@ -1,20 +1,35 @@
 package clueGame;
 
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 public class ClueGame {
 	private Map<Character, String> rooms;
+	private String configFile, legendFile;
+	private Board board;
 	
 	public ClueGame(String configFile, String legendFile) {
-
+		this.configFile = configFile;
+		this.legendFile = legendFile;
+		board = new Board();
 	}
 
 	public Board getBoard () {
-		Board board = new Board();
-		return board ;
+		return board;
 	}
 	
 	public void loadConfigFiles () {
 		
+	}
+	
+	//Helper functions, all private.
+	private void loadLegend() throws BadConfigFormatException{
+		Scanner scanner = new Scanner(legendFile);
+		while(scanner.hasNextLine()){
+			String temp = scanner.nextLine();
+
+			//format is C, val
+			rooms.put(temp.charAt(0), temp.substring(3, temp.length()));
+		}
 	}
 }

@@ -5,13 +5,15 @@ import java.util.Map;
 public class ClueGame {
 	private Map<Character, String> rooms;
 	
-	public ClueGame(String string, String string2) {
+	public ClueGame(String configFile, String legendFile) {
 
 	}
 
 	public Board getBoard () {
-		return null;
+		Board board = new Board();
+		return board ;
 	}
+	
 	public void loadConfigFiles () {
 		
 	}

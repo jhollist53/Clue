@@ -6,13 +6,13 @@ import clueGame.RoomCell.DoorDirection;
 
 public class Board {
 	private ArrayList<ArrayList<BoardCell>> boardLayout;
-	private int numRows, numColumns;
+	private int xDim, yDim;
 	private Map<Character, String> rooms = new HashMap<Character, String>();
-	
+
 	Board() {
-		
+
 	}
-	
+
 	public void loadBoardConfig (String configFile) {
 		Scanner scanner = new Scanner(configFile);
 		while(scanner.hasNextLine()){
@@ -30,13 +30,13 @@ public class Board {
 					else{
 						switch (i.charAt(1)) {
 						case 'U': dir = DoorDirection.UP;
-							break;
+						break;
 						case 'D': dir = DoorDirection.DOWN;
-							break;
+						break;
 						case 'L': dir = DoorDirection.LEFT;
-							break;
+						break;
 						case 'R': dir = DoorDirection.RIGHT;
-							break;
+						break;
 						}	
 					}
 					boardLayout.get(boardLayout.size()).add(
@@ -50,26 +50,27 @@ public class Board {
 		return boardLayout;
 	}
 
-	public int getNumRows() {
-		return numRows;
+	public int getxDim() {
+		return xDim;
 	}
 
-	public int getNumColumns() {
-		return numColumns;
+	public int getyDim() {
+		return yDim;
 	}
 
 	public Map<Character, String> getRooms() {
 		return rooms;
 	}
 
-	public RoomCell getRoomCellAt(int row, int col) {
-		RoomCell roomCell = new RoomCell();
-		return roomCell;
+	public RoomCell getRoomCellAt(int x, int y) {
+		if (boardLayout.get(x).get(y).isRoom()) {
+			return (RoomCell) boardLayout.get(x).get(y);
+		}
+		return new RoomCell();
 	}
 
-	public BoardCell getCellAt(int row, int col) {
-		BoardCell boardCell = new WalkwayCell();
-		return boardCell;
+	public BoardCell getCellAt(int x, int y) {
+		return boardLayout.get(x).get(y);
 	}
 
 }

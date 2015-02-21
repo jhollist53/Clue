@@ -34,7 +34,7 @@ public class Board {
 			for(String i : temp){
 				if(i.charAt(0) == 'W'){
 					boardLayout.get(boardLayout.size() - 1).add(
-							new WalkwayCell(boardLayout.size() -1, boardLayout.get(boardLayout.size()).size()));
+							new WalkwayCell(boardLayout.size() - 1, boardLayout.get(boardLayout.size() - 1).size() - 1));
 				}
 				else{
 					DoorDirection dir = null;
@@ -51,8 +51,8 @@ public class Board {
 						break;
 						}	
 					}
-					boardLayout.get(boardLayout.size()).add(
-							new RoomCell(boardLayout.size() - 1, boardLayout.get(boardLayout.size()).size() - 1, i.charAt(0), dir));
+					boardLayout.get(boardLayout.size() - 1).add(
+							new RoomCell(boardLayout.size() - 1, boardLayout.get(boardLayout.size() - 1).size() - 1, i.charAt(0), dir));
 				}
 			}
 		}

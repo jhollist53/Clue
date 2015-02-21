@@ -12,6 +12,7 @@ public class ClueGame {
 		this.configFile = configFile;
 		this.legendFile = legendFile;
 		board = new Board();
+		rooms = new HashMap<Character, String>();
 	}
 
 	public Board getBoard () {
@@ -22,7 +23,7 @@ public class ClueGame {
 		try{
 			loadLegend();
 		} catch (BadConfigFormatException e){
-			
+			System.out.println(e);
 		}
 		board.loadBoardConfig(configFile);
 	}

@@ -8,12 +8,12 @@ public class Board {
 	private ArrayList<ArrayList<BoardCell>> boardLayout;
 	private int xDim, yDim;
 	private Map<Character, String> rooms;
-	
+
 	public Board() {
 		boardLayout = new ArrayList<ArrayList<BoardCell>>();
 		rooms = new HashMap<Character, String>();
 	}
-	
+
 	public void loadBoardConfig (String configFile) {
 		readBoardFromFile(configFile);
 		try{
@@ -42,13 +42,13 @@ public class Board {
 					else{
 						switch (i.charAt(1)) {
 						case 'U': dir = DoorDirection.UP;
-							break;
+						break;
 						case 'D': dir = DoorDirection.DOWN;
-							break;
+						break;
 						case 'L': dir = DoorDirection.LEFT;
-							break;
+						break;
 						case 'R': dir = DoorDirection.RIGHT;
-							break;
+						break;
 						}	
 					}
 					boardLayout.get(boardLayout.size()).add(
@@ -84,12 +84,12 @@ public class Board {
 		return boardLayout;
 	}
 
-	public int getNumRows() {
-		return numRows;
+	public int getxDim() {
+		return xDim;
 	}
 
-	public int getNumColumns() {
-		return numColumns;
+	public int getyDim() {
+		return yDim;
 	}
 
 	public Map<Character, String> getRooms() {
@@ -99,11 +99,18 @@ public class Board {
 	public RoomCell getRoomCellAt(int x, int y) {
 		RoomCell roomCell = new RoomCell();
 		return roomCell;
+	public RoomCell getRoomCellAt(int x, int y) {
+		if (boardLayout.get(x).get(y).isRoom()) {
+			return (RoomCell) boardLayout.get(x).get(y);
+		}
+		return new RoomCell();
 	}
 
 	public BoardCell getCellAt(int x, int y) {
 		BoardCell boardCell = new WalkwayCell();
 		return boardCell;
+	public BoardCell getCellAt(int x, int y) {
+		return boardLayout.get(x).get(y);
 	}
 
 }

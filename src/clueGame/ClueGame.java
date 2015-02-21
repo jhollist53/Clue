@@ -19,7 +19,12 @@ public class ClueGame {
 	}
 	
 	public void loadConfigFiles () {
-		
+		try{
+			loadLegend();
+		} catch (BadConfigFormatException e){
+			
+		}
+		board.loadBoardConfig(configFile);
 	}
 	
 	//Helper functions, all private.
@@ -31,5 +36,6 @@ public class ClueGame {
 			//format is C, val
 			rooms.put(temp.charAt(0), temp.substring(3, temp.length()));
 		}
+		scanner.close();
 	}
 }

@@ -97,18 +97,12 @@ public class Board {
 	}
 
 	public RoomCell getRoomCellAt(int x, int y) {
-		RoomCell roomCell = new RoomCell();
-		return roomCell;
-	public RoomCell getRoomCellAt(int x, int y) {
 		if (boardLayout.get(x).get(y).isRoom()) {
 			return (RoomCell) boardLayout.get(x).get(y);
 		}
-		return new RoomCell();
+		return null;
 	}
 
-	public BoardCell getCellAt(int x, int y) {
-		BoardCell boardCell = new WalkwayCell();
-		return boardCell;
 	public BoardCell getCellAt(int x, int y) {
 		return boardLayout.get(x).get(y);
 	}

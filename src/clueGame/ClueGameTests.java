@@ -41,8 +41,8 @@ public class ClueGameTests {
 
 	@Test
 	public void boardSize() {
-		assertEquals(NUM_COLS, board.getNumColumns());
-		assertEquals(NUM_ROWS, board.getNumRows());
+		assertEquals(NUM_COLS, board.getxDim());
+		assertEquals(NUM_ROWS, board.getyDim());
 	}
 
 	@Test
@@ -74,10 +74,10 @@ public class ClueGameTests {
 	public void numDoors() 
 	{
 		int numDoors = 0;
-		int totalCells = board.getNumColumns() * board.getNumRows();
+		int totalCells = board.getxDim() * board.getyDim();
 		assertEquals(621, totalCells);
-		for (int i = 0; i < board.getNumRows(); i++)
-			for (int j=0; j<board.getNumColumns(); j++) {
+		for (int i = 0; i < board.getxDim(); i++)
+			for (int j=0; j< board.getyDim(); j++) {
 				BoardCell cell = board.getCellAt(i, j);
 				if (cell.isDoorway())
 					numDoors++;

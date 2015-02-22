@@ -60,7 +60,8 @@ public class Board {
 		scanner.close();
 	}
 	
-	private void verifyBoard() throws BadConfigFormatException{
+	//Has to be public for testing.
+	public void verifyBoard() throws BadConfigFormatException{
 		//Board is not yet transposed, still in form (y,x)
 		xDim = boardLayout.get(0).size();
 		yDim = boardLayout.size();

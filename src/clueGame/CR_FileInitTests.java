@@ -48,8 +48,8 @@ public class CR_FileInitTests {
 	@Test
 	public void testBoardDimensions() {
 		// Ensure we have the proper number of rows and columns
-		assertEquals(NUM_ROWS, board.getxDim());
-		assertEquals(NUM_COLUMNS, board.getyDim());		
+		assertEquals(NUM_ROWS, board.getyDim());
+		assertEquals(NUM_COLUMNS, board.getxDim());		
 	}
 	
 	// Test a doorway in each direction, plus two cells that are not
@@ -103,10 +103,10 @@ public class CR_FileInitTests {
 	@Test
 	public void testRoomInitials() {
 		assertEquals('C', board.getRoomCellAt(0, 0).getInitial());
-		assertEquals('R', board.getRoomCellAt(4, 8).getInitial());
-		assertEquals('B', board.getRoomCellAt(9, 0).getInitial());
-		assertEquals('O', board.getRoomCellAt(21, 22).getInitial());
-		assertEquals('K', board.getRoomCellAt(21, 0).getInitial());
+		assertEquals('R', board.getRoomCellAt(8, 4).getInitial());
+		assertEquals('B', board.getRoomCellAt(0, 9).getInitial());
+		assertEquals('O', board.getRoomCellAt(22, 21).getInitial());
+		assertEquals('K', board.getRoomCellAt(0, 21).getInitial());
 	}
 	
 	// Test that an exception is thrown for a bad config file

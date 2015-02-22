@@ -26,4 +26,8 @@ public class RoomCell extends BoardCell {
 		return roomInitial;
 	}
 	
+	public boolean isDoorway() {
+		return true;
+	}
+
 }

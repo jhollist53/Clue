@@ -3,6 +3,12 @@ package clueGame;
 public abstract class BoardCell {
 	protected int x;
 	protected int y;
+
+	BoardCell() {
+		isWalkway();
+		isRoom();
+		isDoorway();
+	}
 		
 	public boolean isWalkway () {
 		return false;
@@ -13,6 +19,6 @@ public abstract class BoardCell {
 	}
 	
 	public boolean isDoorway () {
-		return false;
+		return true;
 	}
 }

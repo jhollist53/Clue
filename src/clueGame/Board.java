@@ -100,7 +100,7 @@ public class Board {
 		}
 		boardLayout = temp;
 	}
-
+	
 	public ArrayList<ArrayList<BoardCell>> getBoardLayout() {
 		return boardLayout;
 	}

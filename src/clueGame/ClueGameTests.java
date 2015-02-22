@@ -7,6 +7,8 @@ import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import clueGame.RoomCell.DoorDirection;
+
 public class ClueGameTests {
 
 	private static Board board;
@@ -49,26 +51,26 @@ public class ClueGameTests {
 
 	@Test
 	public void doorDirections() {
-		RoomCell room = board.getRoomCellAt(1, 4);
+		RoomCell room = board.getRoomCellAt(4, 1);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.RIGHT, room.getDoorDirection());
 
-		room = board.getRoomCellAt(2, 9);
+		room = board.getRoomCellAt(9, 2);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.LEFT, room.getDoorDirection());
 
-		room = board.getRoomCellAt(8, 23);
+		room = board.getRoomCellAt(23, 8);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.UP, room.getDoorDirection());
 
-		room = board.getRoomCellAt(16, 17);
+		room = board.getRoomCellAt(17, 16);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.DOWN, room.getDoorDirection());
 
 		room = board.getRoomCellAt(0, 0);
 		assertFalse(room.isDoorway());	
 
-		BoardCell cell = board.getCellAt(16, 26);
+		BoardCell cell = board.getCellAt(26, 16);
 		assertFalse(cell.isDoorway());
 	}
 
@@ -81,7 +83,10 @@ public class ClueGameTests {
 		for (int i = 0; i < board.getxDim(); i++)
 			for (int j=0; j< board.getyDim(); j++) {
 				BoardCell cell = board.getCellAt(i, j);
-				if (cell.isDoorway())
+				if (cell.isWalkway()) {
+					
+				}
+				else if (((RoomCell)cell).getDoorDirection() != DoorDirection.NONE)
 					numDoors++;
 			}
 		assertEquals(36, numDoors);

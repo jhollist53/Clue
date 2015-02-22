@@ -68,6 +68,7 @@ public class ClueGameTests {
 		assertEquals(RoomCell.DoorDirection.DOWN, room.getDoorDirection());
 
 		room = board.getRoomCellAt(0, 0);
+		System.out.println(room.isDoorway());
 		assertFalse(room.isDoorway());	
 
 		BoardCell cell = board.getCellAt(26, 16);

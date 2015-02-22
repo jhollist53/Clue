@@ -1,5 +1,10 @@
 package clueGame;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 import clueGame.RoomCell.DoorDirection;
@@ -24,40 +29,66 @@ public class Board {
 		transposeBoard();
 		this.rooms = rooms;
 	}
+	/*
+	File file = new File(legendFile);
+	try{
+		FileReader fReader = new FileReader(file);
+		BufferedReader bReader = new BufferedReader(fReader);
+		String line;
+		while((line = bReader.readLine()) != null){
+			//format is C, val
+			rooms.put(line.charAt(0), line.substring(3, line.length()));
+		}
+		bReader.close();
+	} catch (FileNotFoundException e){
+		System.out.println("File " + legendFile + " not found!");
+	} catch (IOException e) {
+		e.printStackTrace();
+	}*/
 	
-	private void readBoardFromFile(String file){
+	private void readBoardFromFile(String inFile){
 		//Reads data from file, line by line.
-		Scanner scanner = new Scanner(file);
-		while(scanner.hasNextLine()){
-			//Regular expression, matches any leading whitespace, trailing whitespace, then any other leading whitespace.
-			List<String> temp = Arrays.asList(scanner.nextLine().split("\\s*,\\s*"));
-			boardLayout.add(new ArrayList<BoardCell>());
-			for(String i : temp){
-				if(i.charAt(0) == 'W'){
-					boardLayout.get(boardLayout.size() - 1).add(
-							new WalkwayCell(boardLayout.size() - 1, boardLayout.get(boardLayout.size() - 1).size() - 1));
-				}
-				else{
-					DoorDirection dir = null;
-					if(i.length() == 1){ dir = DoorDirection.NONE; }
-					else{
-						switch (i.charAt(1)) {
-						case 'U': dir = DoorDirection.UP;
-						break;
-						case 'D': dir = DoorDirection.DOWN;
-						break;
-						case 'L': dir = DoorDirection.LEFT;
-						break;
-						case 'R': dir = DoorDirection.RIGHT;
-						break;
-						}	
+		File file = new File(inFile);
+
+		try {
+			FileReader fReader = new FileReader(file);
+			BufferedReader bReader = new BufferedReader(fReader);
+			String temp;
+			while((temp = bReader.readLine()) != null){
+				//Regular expression, matches any leading whitespace, trailing whitespace, then any other leading whitespace.
+				boardLayout.add(new ArrayList<BoardCell>());
+				for(String i : Arrays.asList(temp.split("\\s*,\\s*"))){
+					if(i.charAt(0) == 'W'){
+						boardLayout.get(boardLayout.size() - 1).add(
+								new WalkwayCell(boardLayout.size() - 1, boardLayout.get(boardLayout.size() - 1).size() - 1));
 					}
-					boardLayout.get(boardLayout.size() - 1).add(
-							new RoomCell(boardLayout.size() - 1, boardLayout.get(boardLayout.size() - 1).size() - 1, i.charAt(0), dir));
+					else{
+						DoorDirection dir = null;
+						if(i.length() == 1){ dir = DoorDirection.NONE; }
+						else{
+							switch (i.charAt(1)) {
+							case 'U': dir = DoorDirection.UP;
+							break;
+							case 'D': dir = DoorDirection.DOWN;
+							break;
+							case 'L': dir = DoorDirection.LEFT;
+							break;
+							case 'R': dir = DoorDirection.RIGHT;
+							break;
+							}	
+						}
+						boardLayout.get(boardLayout.size() - 1).add(
+								new RoomCell(boardLayout.size() - 1, boardLayout.get(boardLayout.size() - 1).size() - 1, i.charAt(0), dir));
+					}
 				}
 			}
+			bReader.close();
+		} catch (FileNotFoundException e){
+			System.out.println("File " + inFile + " not found!");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		scanner.close();
+		
 	}
 	
 	private void verifyBoard() throws BadConfigFormatException{

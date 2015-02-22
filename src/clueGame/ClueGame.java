@@ -45,7 +45,5 @@ public class ClueGame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 }

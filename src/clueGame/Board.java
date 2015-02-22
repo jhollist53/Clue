@@ -14,7 +14,7 @@ public class Board {
 		rooms = new HashMap<Character, String>();
 	}
 
-	public void loadBoardConfig (String configFile) {
+	public void loadBoardConfig (String configFile, Map<Character, String> rooms) {
 		readBoardFromFile(configFile);
 		try{
 			verifyBoard();
@@ -22,6 +22,7 @@ public class Board {
 			System.out.println(e);
 		}
 		transposeBoard();
+		this.rooms = rooms;
 	}
 	
 	private void readBoardFromFile(String file){

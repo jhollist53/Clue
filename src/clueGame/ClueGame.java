@@ -25,18 +25,27 @@ public class ClueGame {
 		} catch (BadConfigFormatException e){
 			System.out.println(e);
 		}
-		board.loadBoardConfig(configFile);
+		board.loadBoardConfig(configFile, rooms);
 	}
 	
 	//Helper functions, all private.
 	private void loadLegend() throws BadConfigFormatException{
-		Scanner scanner = new Scanner(legendFile);
-		while(scanner.hasNextLine()){
-			String temp = scanner.nextLine();
-
-			//format is C, val
-			rooms.put(temp.charAt(0), temp.substring(3, temp.length()));
+		File file = new File(legendFile);
+		try{
+			FileReader fReader = new FileReader(file);
+			BufferedReader bReader = new BufferedReader(fReader);
+			String line;
+			while((line = bReader.readLine()) != null){
+				//format is C, val
+				rooms.put(line.charAt(0), line.substring(3, line.length()));
+			}
+			bReader.close();
+		} catch (FileNotFoundException e){
+			System.out.println("File " + legendFile + " not found!");
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		scanner.close();
+		
+		
 	}
 }

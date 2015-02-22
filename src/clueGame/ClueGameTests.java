@@ -11,15 +11,18 @@ import org.junit.Test;
 public class ClueGameTests {
 
 	private static Board board;
-	public static final int NUM_ROOMS = 9;
+	public static final int NUM_ROOMS = 11;
 	public static final int NUM_ROWS = 23;
 	public static final int NUM_COLS = 27;
 	public static final String LAYOUT_FILE = "ClueLayout.csv";
 	public static final String LEGEND_FILE = "LegendFile.txt";
+	public static final String LAYOUT_FILE_BAD_SIZE = "ClueLayoutBadColumns.csv";
+	public static final String LAYOUT_FILE_BAD_ROOM = "ClueLayoutBadRooom.csv";
+	public static final String LEGEND_FILE_BAD_FORMAT = "ClueLegendBadFormat.txt";
 
 	@BeforeClass
 	public static void setUp () {
-		ClueGame game = new ClueGame("ClueLayout", "LegendFile");
+		ClueGame game = new ClueGame(LAYOUT_FILE, LEGEND_FILE);
 		game.loadConfigFiles();
 		board = game.getBoard();
 	}
@@ -95,22 +98,19 @@ public class ClueGameTests {
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadColumns() throws BadConfigFormatException, FileNotFoundException {
-		ClueGame game = new ClueGame("ClueLayoutBadSize", "LegendFile");
-		game.loadConfigFiles();
-		game.getBoard().loadBoardConfig(LAYOUT_FILE);
+		ClueGame gameBad = new ClueGame(LAYOUT_FILE_BAD_SIZE, LEGEND_FILE);
+		gameBad.loadConfigFiles();
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
-		ClueGame game = new ClueGame("ClueLayoutBadRoom", "LegendFile");
-		game.loadConfigFiles();
-		game.getBoard().loadBoardConfig(LAYOUT_FILE);
+		ClueGame gameBad = new ClueGame(LAYOUT_FILE_BAD_ROOM, LEGEND_FILE);
+		gameBad.loadConfigFiles();
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoomFormat() throws BadConfigFormatException, FileNotFoundException {
-		ClueGame game = new ClueGame("ClueLayout", "LegendBadFormat");
-		game.loadConfigFiles();
-		game.getBoard().loadBoardConfig(LAYOUT_FILE);
+		ClueGame gameBad = new ClueGame(LAYOUT_FILE, LEGEND_FILE_BAD_FORMAT);
+		gameBad.loadConfigFiles();
 	}
 }

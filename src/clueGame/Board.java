@@ -128,4 +128,35 @@ public class Board {
 		return boardLayout.get(x).get(y);
 	}
 
-}
+	public void VerifyBoard() throws BadConfigFormatException{
+			//Board is not yet transposed, still in form (y,x)
+			xDim = boardLayout.get(0).size();
+			yDim = boardLayout.size();
+			for(ArrayList<BoardCell> x : boardLayout){
+				if (x.size() != yDim){ throw new BadConfigFormatException("Uneven row length detected.");}
+			}
+		}
+	public void calcAdjacencies() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public LinkedList<BoardCell> getAdjList(int i, int j) {
+		LinkedList<BoardCell> list = new LinkedList<BoardCell>();
+		return list;
+	}
+
+	public void calcTargets(int i, int j, int k) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Set<BoardCell> getTargets() {
+		Set<BoardCell> set = new HashSet<BoardCell>();
+		return set;
+	}
+
+		
+	}
+
+

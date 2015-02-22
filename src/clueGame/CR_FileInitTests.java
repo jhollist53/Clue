@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,7 +14,6 @@ import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.ClueGame;
 import clueGame.RoomCell;
-import clueGame.RoomCell.DoorDirection;
 
 public class CR_FileInitTests {
 	// I made this static because I only want to set it up one 

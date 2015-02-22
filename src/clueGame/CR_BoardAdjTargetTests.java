@@ -1,4 +1,4 @@
-package clueTests;
+package clueGame;
 
 import java.util.LinkedList;
 import java.util.Set;
@@ -12,10 +12,13 @@ import clueGame.BoardCell;
 import clueGame.ClueGame;
 
 public class CR_BoardAdjTargetTests {
+	public static final String LAYOUT_FILE = "ClueLayout.csv";
+	public static final String LEGEND_FILE = "LegendFile.txt";
+	
 	private static Board board;
 	@BeforeClass
 	public static void setUp() {
-		ClueGame game = new ClueGame();
+		ClueGame game = new ClueGame(LAYOUT_FILE, LEGEND_FILE);
 		game.loadConfigFiles();
 		board = game.getBoard();
 		board.calcAdjacencies();

@@ -19,7 +19,7 @@ public class ClueGameTests {
 	public static final String LAYOUT_FILE_BAD_SIZE = "ClueLayoutBadColumns.csv";
 	public static final String LAYOUT_FILE_BAD_ROOM = "ClueLayoutBadRooom.csv";
 	public static final String LEGEND_FILE_BAD_FORMAT = "ClueLegendBadFormat.txt";
-
+	
 	@BeforeClass
 	public static void setUp () {
 		ClueGame game = new ClueGame(LAYOUT_FILE, LEGEND_FILE);
@@ -99,18 +99,24 @@ public class ClueGameTests {
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadColumns() throws BadConfigFormatException, FileNotFoundException {
 		ClueGame gameBad = new ClueGame(LAYOUT_FILE_BAD_SIZE, LEGEND_FILE);
-		gameBad.loadConfigFiles();
+		testException(gameBad);
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
 		ClueGame gameBad = new ClueGame(LAYOUT_FILE_BAD_ROOM, LEGEND_FILE);
-		gameBad.loadConfigFiles();
+		testException(gameBad);
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoomFormat() throws BadConfigFormatException, FileNotFoundException {
 		ClueGame gameBad = new ClueGame(LAYOUT_FILE, LEGEND_FILE_BAD_FORMAT);
-		gameBad.loadConfigFiles();
+		testException(gameBad);
+	}
+	
+	public void testException(ClueGame g) throws BadConfigFormatException{
+		g.loadConfigFiles();
+		Board board = g.getBoard();
+		board.verifyBoard();
 	}
 }

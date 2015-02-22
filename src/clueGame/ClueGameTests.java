@@ -2,7 +2,6 @@ package clueGame;
 
 import static org.junit.Assert.*;
 
-import java.io.FileNotFoundException;
 import java.util.Map;
 
 import org.junit.BeforeClass;
@@ -17,7 +16,7 @@ public class ClueGameTests {
 	public static final String LAYOUT_FILE = "ClueLayout.csv";
 	public static final String LEGEND_FILE = "LegendFile.txt";
 	public static final String LAYOUT_FILE_BAD_SIZE = "ClueLayoutBadColumns.csv";
-	public static final String LAYOUT_FILE_BAD_ROOM = "ClueLayoutBadRooom.csv";
+	public static final String LAYOUT_FILE_BAD_ROOM = "ClueLayoutBadRoom.csv";
 	public static final String LEGEND_FILE_BAD_FORMAT = "ClueLegendBadFormat.txt";
 	
 	@BeforeClass
@@ -97,19 +96,19 @@ public class ClueGameTests {
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
-	public void testBadColumns() throws BadConfigFormatException, FileNotFoundException {
+	public void testBadColumns() throws BadConfigFormatException {
 		ClueGame gameBad = new ClueGame(LAYOUT_FILE_BAD_SIZE, LEGEND_FILE);
 		testException(gameBad);
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
-	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
+	public void testBadRoom() throws BadConfigFormatException {
 		ClueGame gameBad = new ClueGame(LAYOUT_FILE_BAD_ROOM, LEGEND_FILE);
 		testException(gameBad);
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
-	public void testBadRoomFormat() throws BadConfigFormatException, FileNotFoundException {
+	public void testBadRoomFormat() throws BadConfigFormatException {
 		ClueGame gameBad = new ClueGame(LAYOUT_FILE, LEGEND_FILE_BAD_FORMAT);
 		testException(gameBad);
 	}

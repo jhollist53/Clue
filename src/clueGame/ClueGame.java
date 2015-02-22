@@ -28,7 +28,7 @@ public class ClueGame {
 		board.loadBoardConfig(configFile, rooms);
 	}
 	
-	//Helper functions, all private.
+	//Has to be public for testing.
 	private void loadLegend() throws BadConfigFormatException{
 		File file = new File(legendFile);
 		try{

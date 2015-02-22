@@ -23,28 +23,17 @@ public class Board {
 		readBoardFromFile(configFile);
 		try{
 			verifyBoard();
+			transposeBoard();
 		} catch (BadConfigFormatException e) {
 			System.out.println(e);
 		}
-		transposeBoard();
 		this.rooms = rooms;
 	}
-	/*
-	File file = new File(legendFile);
-	try{
-		FileReader fReader = new FileReader(file);
-		BufferedReader bReader = new BufferedReader(fReader);
-		String line;
-		while((line = bReader.readLine()) != null){
-			//format is C, val
-			rooms.put(line.charAt(0), line.substring(3, line.length()));
-		}
-		bReader.close();
-	} catch (FileNotFoundException e){
-		System.out.println("File " + legendFile + " not found!");
-	} catch (IOException e) {
-		e.printStackTrace();
-	}*/
+	
+	public void testLoadBoardConfig(String configFile) throws BadConfigFormatException{
+		readBoardFromFile(configFile);
+		verifyBoard();
+	}
 	
 	private void readBoardFromFile(String inFile){
 		//Reads data from file, line by line.
@@ -91,7 +80,6 @@ public class Board {
 		
 	}
 	
-	//Has to be public for testing.
 	public void verifyBoard() throws BadConfigFormatException{
 		//Board is not yet transposed, still in form (y,x)
 		xDim = boardLayout.get(0).size();

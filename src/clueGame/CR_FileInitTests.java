@@ -1,5 +1,4 @@
-package clueTests;
-
+package clueGame;
 // Doing a static import allows me to write assertEquals rather than
 // Assert.assertEquals
 import static org.junit.Assert.*;
@@ -16,6 +15,7 @@ import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.ClueGame;
 import clueGame.RoomCell;
+import clueGame.RoomCell.DoorDirection;
 
 public class CR_FileInitTests {
 	// I made this static because I only want to set it up one 
@@ -27,7 +27,7 @@ public class CR_FileInitTests {
 	
 	@BeforeClass
 	public static void setUp() {
-		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
+		ClueGame game = new ClueGame("CR_ClueLayout.csv", "ClueLegend.txt");
 		game.loadConfigFiles();
 		board = game.getBoard();
 	}
@@ -48,8 +48,8 @@ public class CR_FileInitTests {
 	@Test
 	public void testBoardDimensions() {
 		// Ensure we have the proper number of rows and columns
-		assertEquals(NUM_ROWS, board.getNumRows());
-		assertEquals(NUM_COLUMNS, board.getNumColumns());		
+		assertEquals(NUM_ROWS, board.getxDim());
+		assertEquals(NUM_COLUMNS, board.getyDim());		
 	}
 	
 	// Test a doorway in each direction, plus two cells that are not
@@ -84,15 +84,18 @@ public class CR_FileInitTests {
 	public void testNumberOfDoorways() 
 	{
 		int numDoors = 0;
-		int totalCells = board.getNumColumns() * board.getNumRows();
-		Assert.assertEquals(506, totalCells);
-		for (int row=0; row<board.getNumRows(); row++)
-			for (int col=0; col<board.getNumColumns(); col++) {
+		int totalCells = board.getyDim() * board.getxDim();
+		assertEquals(506, totalCells);
+		for (int row=0; row<board.getxDim(); row++)
+			for (int col=0; col<board.getyDim(); col++) {
 				BoardCell cell = board.getCellAt(row, col);
-				if (cell.isDoorway())
+				if (cell.isWalkway()) {
+					
+				}
+				else if (((RoomCell)cell).getDoorDirection() != DoorDirection.NONE)
 					numDoors++;
 			}
-		Assert.assertEquals(16, numDoors);
+		assertEquals(16, numDoors);
 	}
 
 	// Test a few room cells to ensure the room initial is
@@ -114,23 +117,26 @@ public class CR_FileInitTests {
 		// You may change these calls if needed to match your function names
 		// My loadConfigFiles has a try/catch, so I can't call it directly to
 		// see test throwing the BadConfigFormatException
-		game.loadRoomConfig();
-		game.getBoard().loadBoardConfig();
+		game.loadConfigFiles();
+		Board board = game.getBoard();
+		board.verifyBoard();
 	}
 	// Test that an exception is thrown for a bad config file
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
 		// overloaded Board ctor takes config file name
 		ClueGame game = new ClueGame("ClueLayoutBadRoom.csv", "ClueLegend.txt");
-		game.loadRoomConfig();
-		game.getBoard().loadBoardConfig();
+		game.loadConfigFiles();
+		Board board = game.getBoard();
+		board.verifyBoard();
 	}
 	// Test that an exception is thrown for a bad config file
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoomFormat() throws BadConfigFormatException, FileNotFoundException {
 		// overloaded Board ctor takes config file name
 		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegendBadFormat.txt");
-		game.loadRoomConfig();
-		game.getBoard().loadBoardConfig();
+		game.loadConfigFiles();
+		Board board = game.getBoard();
+		board.verifyBoard();
 	}
 }

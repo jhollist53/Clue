@@ -58,23 +58,23 @@ public class CR_FileInitTests {
 	@Test
 	public void FourDoorDirections() {
 		// Test one each RIGHT/LEFT/UP/DOWN
-		RoomCell room = board.getRoomCellAt(4, 3);
+		RoomCell room = board.getRoomCellAt(3, 4);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.RIGHT, room.getDoorDirection());
-		room = board.getRoomCellAt(4, 8);
+		room = board.getRoomCellAt(8, 4);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.DOWN, room.getDoorDirection());
-		room = board.getRoomCellAt(15, 18);
+		room = board.getRoomCellAt(18, 15);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.LEFT, room.getDoorDirection());
-		room = board.getRoomCellAt(14, 11);
+		room = board.getRoomCellAt(11, 14);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.UP, room.getDoorDirection());
 		// Test that room pieces that aren't doors know it
 		room = board.getRoomCellAt(14, 14);
 		assertFalse(room.isDoorway());	
 		// Test that walkways are not doors
-		BoardCell cell = board.getCellAt(0, 6);
+		BoardCell cell = board.getCellAt(6, 0);
 		assertFalse(cell.isDoorway());		
 
 	}
@@ -89,14 +89,13 @@ public class CR_FileInitTests {
 		for (int row=0; row<board.getxDim(); row++)
 			for (int col=0; col<board.getyDim(); col++) {
 				BoardCell cell = board.getCellAt(row, col);
-				if (cell.isWalkway()) {
-					
-				}
-				else if (((RoomCell)cell).getDoorDirection() != DoorDirection.NONE)
+				if (cell.isDoorway()) {
 					numDoors++;
+				}
 			}
 		assertEquals(16, numDoors);
 	}
+	
 
 	// Test a few room cells to ensure the room initial is
 	// correct.
@@ -128,7 +127,7 @@ public class CR_FileInitTests {
 		ClueGame game = new ClueGame("ClueLayoutBadRoom.csv", "ClueLegend.txt");
 		game.loadConfigFiles();
 		Board board = game.getBoard();
-		board.verifyBoard();
+		board.VerifyBoard();
 	}
 	// Test that an exception is thrown for a bad config file
 	@Test (expected = BadConfigFormatException.class)
@@ -137,6 +136,6 @@ public class CR_FileInitTests {
 		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegendBadFormat.txt");
 		game.loadConfigFiles();
 		Board board = game.getBoard();
-		board.verifyBoard();
+		board.VerifyBoard();
 	}
 }

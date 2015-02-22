@@ -121,7 +121,6 @@ public class ClueGameTests {
 	
 	public void testException(ClueGame g) throws BadConfigFormatException{
 		g.loadConfigFiles();
-		Board board = g.getBoard();
-		board.verifyBoard();
+		g.getBoard().verifyBoard();
 	}
 }

@@ -8,12 +8,14 @@ import java.io.IOException;
 import java.util.*;
 
 import clueGame.RoomCell.DoorDirection;
+import experiment.BoardCell;
 
 public class Board {
 	private ArrayList<ArrayList<BoardCell>> boardLayout;
 	private int xDim, yDim;
 	private Map<Character, String> rooms;
-
+	private Map<BoardCell, LinkedList<BoardCell>> adjacencies;
+	
 	public Board() {
 		boardLayout = new ArrayList<ArrayList<BoardCell>>();
 		rooms = new HashMap<Character, String>();
@@ -29,12 +31,12 @@ public class Board {
 		}
 		this.rooms = rooms;
 	}
-	
+	/*
 	public void testLoadBoardConfig(String configFile) throws BadConfigFormatException{
 		readBoardFromFile(configFile);
 		verifyBoard();
-	}
-	
+	}*/
+
 	private void readBoardFromFile(String inFile){
 		//Reads data from file, line by line.
 		File file = new File(inFile);
@@ -77,9 +79,9 @@ public class Board {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void verifyBoard() throws BadConfigFormatException{
 		//Board is not yet transposed, still in form (y,x)
 		xDim = boardLayout.get(0).size();
@@ -88,7 +90,7 @@ public class Board {
 			if (x.size() != xDim){ throw new BadConfigFormatException("Uneven row length detected.");}
 		}
 	}
-	
+
 	private void transposeBoard(){
 		ArrayList<ArrayList<BoardCell>> temp = new ArrayList<ArrayList<BoardCell>>();
 		for (int i = 0; i < xDim; i++){
@@ -100,7 +102,7 @@ public class Board {
 		}
 		boardLayout = temp;
 	}
-	
+
 	public ArrayList<ArrayList<BoardCell>> getBoardLayout() {
 		return boardLayout;
 	}
@@ -129,16 +131,32 @@ public class Board {
 	}
 
 	public void VerifyBoard() throws BadConfigFormatException{
-			//Board is not yet transposed, still in form (y,x)
-			xDim = boardLayout.get(0).size();
-			yDim = boardLayout.size();
-			for(ArrayList<BoardCell> x : boardLayout){
-				if (x.size() != yDim){ throw new BadConfigFormatException("Uneven row length detected.");}
+		//Board is not yet transposed, still in form (y,x)
+		xDim = boardLayout.get(0).size();
+		yDim = boardLayout.size();
+		for(ArrayList<BoardCell> x : boardLayout){
+			if (x.size() != yDim){ throw new BadConfigFormatException("Uneven row length detected.");}
+		}
+	}
+	public void calcAdjacencies() {
+		for(int x = 0; x < xDim; x++){
+			for(int y = 0; y < yDim; y++){
+				/*LinkedList<BoardCell> ll = new LinkedList<BoardCell>();
+				if(y-1 >= 0){
+					ll.addLast(board.get((x) + (y-1)*xDim));
+				}
+				if(x+1 < xDim){
+					ll.addLast(board.get((x+1) + y*xDim));
+				}
+				if(y+1 < yDim){
+					ll.addLast(board.get(x + (y+1)*xDim));
+				}
+				if(x-1 >= 0){
+					ll.addLast(board.get((x-1) + y*xDim));
+				}
+				adjacencies.add()*/
 			}
 		}
-	public void calcAdjacencies() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public LinkedList<BoardCell> getAdjList(int i, int j) {
@@ -148,7 +166,7 @@ public class Board {
 
 	public void calcTargets(int i, int j, int k) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public Set<BoardCell> getTargets() {
@@ -156,7 +174,7 @@ public class Board {
 		return set;
 	}
 
-		
-	}
+
+}
 
 

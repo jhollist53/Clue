@@ -9,10 +9,11 @@ public class Board {
 	private ArrayList<ArrayList<BoardCell>> boardLayout;
 	private int xDim, yDim;
 	private Map<Character, String> rooms;
-	private Map<BoardCell, LinkedList<BoardCell>> adjacencies;
+	private HashMap<BoardCell, LinkedList<BoardCell>> adjacencies;
 	
 	public Board() {
 		boardLayout = new ArrayList<ArrayList<BoardCell>>();
+		adjacencies = new HashMap<BoardCell, LinkedList<BoardCell>>();
 		rooms = new HashMap<Character, String>();
 	}
 
@@ -134,29 +135,43 @@ public class Board {
 		}
 	}
 	public void calcAdjacencies() {
+		//BoardCell cell = null;
 		for(int x = 0; x < xDim; x++){
 			for(int y = 0; y < yDim; y++){
-				/*LinkedList<BoardCell> ll = new LinkedList<BoardCell>();
-				if(y-1 >= 0){
-					ll.addLast(board.get((x) + (y-1)*xDim));
+				LinkedList<BoardCell> ll = new LinkedList<BoardCell>();
+				if(boardLayout.get(x).get(y).isWalkway() || boardLayout.get(x).get(y).isDoorway()){
+					if(y-1 >= 0){
+						if(boardLayout.get(x).get(y-1).isWalkway() 
+								|| boardLayout.get(x).get(y-1).isDoorway()){
+							ll.addLast(boardLayout.get(x).get(y-1));
+						}
+					}
+					if(x+1 < xDim){
+						if(boardLayout.get(x+1).get(y).isWalkway() 
+								|| boardLayout.get(x+1).get(y).isDoorway()){
+							ll.addLast(boardLayout.get(x+1).get(y));
+						}
+					}
+					if(y+1 < yDim){
+						if(boardLayout.get(x).get(y+1).isWalkway() 
+								|| boardLayout.get(x).get(y+1).isDoorway()){
+							ll.addLast(boardLayout.get(x).get(y+1));
+						}
+					}
+					if(x-1 >= 0){
+						if(boardLayout.get(x-1).get(y).isWalkway() 
+								|| boardLayout.get(x-1).get(y).isDoorway()){
+							ll.addLast(boardLayout.get(x-1).get(y));
+						}
+					}
 				}
-				if(x+1 < xDim){
-					ll.addLast(board.get((x+1) + y*xDim));
-				}
-				if(y+1 < yDim){
-					ll.addLast(board.get(x + (y+1)*xDim));
-				}
-				if(x-1 >= 0){
-					ll.addLast(board.get((x-1) + y*xDim));
-				}
-				adjacencies.add()*/
+				adjacencies.put(boardLayout.get(x).get(y), ll);
 			}
 		}
 	}
 
-	public LinkedList<BoardCell> getAdjList(int i, int j) {
-		LinkedList<BoardCell> list = new LinkedList<BoardCell>();
-		return list;
+	public LinkedList<BoardCell> getAdjList(int x, int y) {
+		return adjacencies.get(boardLayout.get(x).get(y));
 	}
 
 	public void calcTargets(int i, int j, int k) {

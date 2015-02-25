@@ -24,11 +24,11 @@ public class TestAdjandTargets {
 		assertEquals(0, testList.size());
 		testList = board.getAdjList(15, 20);
 		assertEquals(0, testList.size());
-		testList = board.getAdjList(18, 11);
+		testList = board.getAdjList(18, 13);
 		assertEquals(0, testList.size());
-		testList = board.getAdjList(14, 12);
+		testList = board.getAdjList(22, 11);
 		assertEquals(0, testList.size());
-		testList = board.getAdjList(5, 20);
+		testList = board.getAdjList(6, 20);
 		assertEquals(0, testList.size());
 	}
 

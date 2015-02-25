@@ -2,6 +2,10 @@
 #Ignore emacs backup files.
 *~
 
+//Ignore packup files
+~*
+\#*
+
 #Ignore eclipse files/directories
 .classpath
 .project

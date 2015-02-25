@@ -152,9 +152,10 @@ public class TestAdjandTargets {
 
 		board.calcTargets(0, 13, 2);
 		targets= board.getTargets();
-		assertEquals(2, targets.size());
-		assertTrue(targets.contains(board.getCellAt(13, 1)));
-		assertTrue(targets.contains(board.getCellAt(14, 2)));			
+		assertEquals(3, targets.size());
+		assertTrue(targets.contains(board.getCellAt(2, 13)));
+		assertTrue(targets.contains(board.getCellAt(1, 14)));			
+		assertTrue(targets.contains(board.getCellAt(1, 12)));
 	}
 
 	@Test

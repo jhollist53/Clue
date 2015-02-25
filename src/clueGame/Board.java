@@ -135,11 +135,11 @@ public class Board {
 		}
 	}
 	public void calcAdjacencies() {
-		//BoardCell cell = null;
+		//This has turned into total software gore...
 		for(int x = 0; x < xDim; x++){
 			for(int y = 0; y < yDim; y++){
 				LinkedList<BoardCell> ll = new LinkedList<BoardCell>();
-				if(boardLayout.get(x).get(y).isWalkway() || boardLayout.get(x).get(y).isDoorway()){
+				if(boardLayout.get(x).get(y).isWalkway()){
 					if(y-1 >= 0){
 						if(boardLayout.get(x).get(y-1).isWalkway() 
 								|| boardLayout.get(x).get(y-1).isDoorway()){
@@ -161,6 +161,28 @@ public class Board {
 					if(x-1 >= 0){
 						if(boardLayout.get(x-1).get(y).isWalkway() 
 								|| boardLayout.get(x-1).get(y).isDoorway()){
+							ll.addLast(boardLayout.get(x-1).get(y));
+						}
+					}
+				}
+				else if(boardLayout.get(x).get(y).isDoorway()){
+					if(y-1 >= 0){
+						if(boardLayout.get(x).get(y-1).isWalkway()) { 
+							ll.addLast(boardLayout.get(x).get(y-1));
+						}
+					}
+					if(x+1 < xDim){
+						if(boardLayout.get(x+1).get(y).isWalkway()) {
+							ll.addLast(boardLayout.get(x+1).get(y));
+						}
+					}
+					if(y+1 < yDim){
+						if(boardLayout.get(x).get(y+1).isWalkway()) {
+							ll.addLast(boardLayout.get(x).get(y+1));
+						}
+					}
+					if(x-1 >= 0){
+						if(boardLayout.get(x-1).get(y).isWalkway()) {
 							ll.addLast(boardLayout.get(x-1).get(y));
 						}
 					}

@@ -137,6 +137,13 @@ public class TestAdjandTargets {
 		assertEquals(2, targets.size());
 		assertTrue(targets.contains(board.getCellAt(1, 6)));
 		assertTrue(targets.contains(board.getCellAt(2, 5)));
+
+		board.calcTargets(0, 13, 2);
+		targets= board.getTargets();
+		assertEquals(3, targets.size());
+		assertTrue(targets.contains(board.getCellAt(2, 13)));
+		assertTrue(targets.contains(board.getCellAt(1, 14)));			
+		assertTrue(targets.contains(board.getCellAt(1, 12)));
 	}
 	@Test
 	public void testTargets4() {
@@ -230,6 +237,8 @@ public class TestAdjandTargets {
 		board.calcTargets(23, 3, 2);
 		targets= board.getTargets();
 		assertEquals(3, targets.size());
+		assertTrue(targets.contains(board.getCellAt(23, 5)));
+		assertTrue(targets.contains(board.getCellAt(24, 4)));
 		assertTrue(targets.contains(board.getCellAt(22, 4)));
 		assertTrue(targets.contains(board.getCellAt(24, 4)));
 		assertTrue(targets.contains(board.getCellAt(23, 5)));

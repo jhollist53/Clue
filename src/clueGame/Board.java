@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 import clueGame.RoomCell.DoorDirection;
-import experiment.BoardCell;
 
 public class Board {
 	private ArrayList<ArrayList<BoardCell>> boardLayout;

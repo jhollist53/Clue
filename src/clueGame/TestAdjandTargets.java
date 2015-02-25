@@ -79,7 +79,7 @@ public class TestAdjandTargets {
 		assertEquals(2, testList.size());
 		testList = board.getAdjList(0, 6);
 		assertTrue(testList.contains(board.getCellAt(1, 6)));
-		assertTrue(testList.contains(board.getCellAt(0, 7)));
+		assertTrue(testList.contains(board.getCellAt(0, 5)));
 		assertEquals(2, testList.size());
 		testList = board.getAdjList(6, 14);
 		assertTrue(testList.contains(board.getCellAt(6, 13)));
@@ -96,7 +96,7 @@ public class TestAdjandTargets {
 		testList = board.getAdjList(21, 15);
 		assertTrue(testList.contains(board.getCellAt(21, 16)));
 		assertTrue(testList.contains(board.getCellAt(20, 15)));
-		assertTrue(testList.contains(board.getCellAt(20, 17)));
+		assertTrue(testList.contains(board.getCellAt(22, 15)));
 		assertEquals(3, testList.size());
 		testList = board.getAdjList(14, 22);
 		assertTrue(testList.contains(board.getCellAt(13, 22)));
@@ -203,15 +203,17 @@ public class TestAdjandTargets {
 		assertTrue(targets.contains(board.getCellAt(5, 2)));
 		assertTrue(targets.contains(board.getCellAt(7, 2)));
 		assertTrue(targets.contains(board.getCellAt(4, 1)));
-		assertTrue(targets.contains(board.getCellAt(8, 2)));
+		assertTrue(targets.contains(board.getCellAt(8, 1)));
+		assertTrue(targets.contains(board.getCellAt(5, 0)));
+
 		board.calcTargets(1, 13, 2);
 		targets = board.getTargets();
 		assertEquals(5, targets.size());
 		assertTrue(targets.contains(board.getCellAt(0, 12)));
 		assertTrue(targets.contains(board.getCellAt(2, 12)));
 		assertTrue(targets.contains(board.getCellAt(2, 14)));
-		assertTrue(targets.contains(board.getCellAt(1, 15)));
-		assertTrue(targets.contains(board.getCellAt(0, 14)));
+		assertTrue(targets.contains(board.getCellAt(1, 14)));
+		assertTrue(targets.contains(board.getCellAt(3, 13)));
 	}
 	@Test
 	public void testTargetsShortenTurn()

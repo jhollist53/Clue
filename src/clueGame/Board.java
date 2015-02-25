@@ -91,7 +91,7 @@ public class Board {
 		}
 	}
 
-	private void transposeBoard(){
+	public void transposeBoard(){
 		ArrayList<ArrayList<BoardCell>> temp = new ArrayList<ArrayList<BoardCell>>();
 		for (int i = 0; i < xDim; i++){
 			ArrayList<BoardCell> temp2 = new ArrayList<BoardCell>();

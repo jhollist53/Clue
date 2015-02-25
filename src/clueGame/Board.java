@@ -212,6 +212,8 @@ public class Board {
 	private void findAllTargets(BoardCell startCell, int length){
 		visited.add(startCell);
 		for(BoardCell cell : adjacencies.get(startCell)){
+			if (!visited.contains(cell) && cell.isDoorway())
+				targets.add(cell);
 			if(length == 1){
 				if(!visited.contains(cell)){
 					targets.add(cell);

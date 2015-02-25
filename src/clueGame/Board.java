@@ -4,12 +4,15 @@ import java.io.*;
 import java.util.*;
 
 import clueGame.RoomCell.DoorDirection;
+import experiment.BoardCell;
 
 public class Board {
 	private ArrayList<ArrayList<BoardCell>> boardLayout;
 	private int xDim, yDim;
 	private Map<Character, String> rooms;
 	private HashMap<BoardCell, LinkedList<BoardCell>> adjacencies;
+	private Set<BoardCell> targets;
+	private Set<BoardCell> visited;
 	
 	public Board() {
 		boardLayout = new ArrayList<ArrayList<BoardCell>>();
@@ -196,14 +199,34 @@ public class Board {
 		return adjacencies.get(boardLayout.get(x).get(y));
 	}
 
-	public void calcTargets(int i, int j, int k) {
-		// TODO Auto-generated method stub
-
+	public void calcTargets(int x, int y, int len) {
+		BoardCell cell = this.getCellAt(x, y);
+		visited = new HashSet<BoardCell>();
+		targets = new HashSet<BoardCell>();
+		visited.add(cell);
+		findAllTargets(cell, len);
+		if(targets.contains(cell)){
+			targets.remove(cell);
+		}
+	}
+	
+	private void findAllTargets(BoardCell startCell, int length){
+		visited.add(startCell);
+		for(BoardCell cell : adjacencies.get(startCell)){
+			if(length == 1){
+				if(!visited.contains(cell)){
+					targets.add(cell);
+					}
+			}
+			else {
+				findAllTargets(cell, length - 1);
+			}
+			visited.remove(cell);
+		}
 	}
 
 	public Set<BoardCell> getTargets() {
-		Set<BoardCell> set = new HashSet<BoardCell>();
-		return set;
+		return targets;
 	}
 
 

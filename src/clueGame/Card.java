@@ -2,7 +2,7 @@ package clueGame;
 
 public class Card {
 	
-	enum cardType{
+	public enum cardType{
 		WEAPON, PERSON, ROOM;
 	}
 	
@@ -30,8 +30,16 @@ public class Card {
 		this.type = type;
 	}
 	
-	public boolean equals(Card card1) {
-		return true;
+	@Override
+	public boolean equals(Object o) {
+		if ( o instanceof Card) {
+			return ((Card) o).name.equals(name);
+		}
+		return false;
+	}
+	
+	public String toString() {
+		return name;
 	}
 	
 	

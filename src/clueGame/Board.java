@@ -241,6 +241,8 @@ public class Board {
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
+	
+	public void startTarget( int row, int col, int numSteps) {}
 
 
 }

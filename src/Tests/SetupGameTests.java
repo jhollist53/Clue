@@ -3,31 +3,24 @@ package Tests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Set;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.Card;
-import clueGame.Card.cardType;
 import clueGame.ClueGame;
-import clueGame.ComputerPlayer;
-import clueGame.HumanPlayer;
 import clueGame.Player;
 
 public class SetupGameTests {
 	
 	private static Board board;
-	private static Map<String, Player> players;
+	private static ArrayList<Player> players;
 	private static ArrayList<Card> deck;
+	private static ClueGame game;
 	
 	@BeforeClass
 	public static void setUp() {
-		ClueGame game = new ClueGame("cluelayout.csv", "LegendFile.txt");
+		game = new ClueGame("cluelayout.csv", "LegendFile.txt");
 		game.loadConfigFiles();
 		board = game.getBoard();
 		players = game.getPlayers();
@@ -38,30 +31,21 @@ public class SetupGameTests {
 	@Test
 	public void loadPlayersFromFileTest() {
 		
-		Player player = players.get("JaJim");
-		assertTrue(player.getName().equals("JaJim"));
-		assertTrue(player.getColor().equals("Blue"));
-		assertEquals(0, player.getStartRow());
-		assertEquals(7, player.getStartCol());
+		Player player = new Player("Mrs. Peacock", "Blue", 0, 7);
+		assertTrue(players.contains(player));
 		
-		player = players.get("JaBob");
-		assertTrue(player.getName().equals("JaBob"));
-		assertTrue(player.getColor().equals("Green"));
-		assertEquals(22, player.getStartRow());
-		assertEquals(10, player.getStartCol());
+		player = new Player("Mr. Green", "Green", 22, 10);
+		assertTrue(players.contains(player));
 		
-		player = players.get("JaRichard");
-		assertTrue(player.getName().equals("JaRichard"));
-		assertTrue(player.getColor().equals("Brown"));
-		assertEquals(5, player.getStartRow());
-		assertEquals(0, player.getStartCol());
+		player = new Player("Ms. White", "White", 5, 0);
+		assertTrue(players.contains(player));
 		
 	}
 	
 	@Test
 	public void loadDeckFromFileTest() {
 		
-		assertEquals(27, deck.size());
+		assertEquals(21, deck.size());
 		int weapons = 0, people = 0, rooms = 0;
 		
 		for( Card e: deck) {
@@ -75,16 +59,38 @@ public class SetupGameTests {
 			}
 		}
 		
-		assertEquals(9, weapons);
-		assertEquals(9, people);
+		assertEquals(6, weapons);
+		assertEquals(6, people);
 		assertEquals(9, rooms);
 		
-		Card card1 = new Card("Katana", Card.cardType.WEAPON);
+		Card card1 = new Card("Wrench", Card.cardType.WEAPON);
 		assertTrue(deck.contains(card1));
-		card1 = new Card("JaJim", Card.cardType.PERSON);
+		card1 = new Card("Professor Plum", Card.cardType.PERSON);
 		assertTrue(deck.contains(card1));
 		card1 = new Card("Conservatory", Card.cardType.ROOM);
 		assertTrue(deck.contains(card1));
+
+	}
+	
+	@Test
+	public void dealCardsTest() {
+		game.deal();
+		
+		assertTrue(deck.isEmpty());
+		
+		for (int j = 0; j < 6; j++) {
+			for (Card c: players.get(j).getCards()) {
+				for (int i = 0; i < 6; i++) {
+					if (j != i) assertTrue(!players.get(i).getCards().contains(c));
+				}
+			}
+		}
+		
+		for (int j = 0; j < 6; j++) {
+			for (int i = 0; i < 6; i++) {
+				assertTrue(players.get(i).getCards().size() - players.get(j).getCards().size() <= 1);
+			}
+		}
 
 	}
 	

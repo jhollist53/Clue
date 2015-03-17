@@ -1,21 +1,15 @@
-Katana
-Gun
+Wrench
+Candlestick
+Lead Pipe
+Rope
+Revolver
 Knife
-Crowbar
-Bottle
-Bow
-Shiv
-Chainsaw
-Ax
-JaJim
-JaBob
-JaDavid
-JaFlame
-JaMarcus
-JaRichard
-JaAquamaquesha
-JaShiquandalesha
-JaRule
+Colonel Mustard
+Miss Scarlet
+Professor Plum
+Mr. Green
+Ms. White
+Mrs. Peacock
 Bathroom
 Billiards Room
 Library

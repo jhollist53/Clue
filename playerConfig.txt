@@ -1,24 +1,24 @@
-JaJim
+Mrs. Peacock
 Blue
 0
 7
-JaBob
+Mr. Green
 Green
 22
 10
-JaDavid
-Orange
+Colonel Mustard
+Yellow
 0
 17
-JaFlame
+Miss Scarlet
 Red
 5
 26
-JaMarcus
+Professor Plum
 Purple
 22
 17
-JaRichard
-Brown
+Ms. White
+White
 5
 0

@@ -1,0 +1,27 @@
+Katana
+Gun
+Knife
+Crowbar
+Bottle
+Bow
+Shiv
+Chainsaw
+Ax
+JaJim
+JaBob
+JaDavid
+JaFlame
+JaMarcus
+JaRichard
+JaAquamaquesha
+JaShiquandalesha
+JaRule
+Bathroom
+Billiards Room
+Library
+Study
+Hall
+Lounge
+Conservatory
+Kitchen
+Dining Room

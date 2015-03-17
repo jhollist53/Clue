@@ -1,4 +1,4 @@
-package clueGame;
+package Tests;
 // Doing a static import allows me to write assertEquals rather than
 // Assert.assertEquals
 import static org.junit.Assert.*;
@@ -14,6 +14,7 @@ import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.ClueGame;
 import clueGame.RoomCell;
+import clueGame.RoomCell.DoorDirection;
 
 public class CR_FileInitTests {
 	// I made this static because I only want to set it up one 

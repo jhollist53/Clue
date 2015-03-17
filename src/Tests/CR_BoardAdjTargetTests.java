@@ -1,4 +1,4 @@
-package clueGame;
+package Tests;
 
 import java.util.LinkedList;
 import java.util.Set;
@@ -6,6 +6,10 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import clueGame.Board;
+import clueGame.BoardCell;
+import clueGame.ClueGame;
 public class CR_BoardAdjTargetTests {
 	public static final String LAYOUT_FILE = "CR_ClueLayout.csv";
 	public static final String LEGEND_FILE = "ClueLegend.txt";

@@ -1,7 +1,15 @@
-package clueGame;
+package Tests;
 import static org.junit.Assert.*;
-import java.util.*;
-import org.junit.*;
+
+import java.util.LinkedList;
+import java.util.Set;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import clueGame.Board;
+import clueGame.BoardCell;
+import clueGame.ClueGame;
 public class TestAdjandTargets {
 	private static Board board;
 	@BeforeClass

@@ -1,7 +1,12 @@
 package clueGame;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ClueGame {
 	private Map<Character, String> rooms;
@@ -45,4 +50,14 @@ public class ClueGame {
 			e.printStackTrace();
 		}
 	}
+	
+	private void deal() {}
+	
+	private void selectAnswer() {}
+	
+	private void handleSuggestion( String person, String room, String weapon, Player accusingPlayer ) {}
+	
+	private void checkAccusation(Solution solution) {}
+	
+	
 }

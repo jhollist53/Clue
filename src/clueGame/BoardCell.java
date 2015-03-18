@@ -21,4 +21,10 @@ public abstract class BoardCell implements Comparable<BoardCell>{
 		//Nested tertiary operators ftw
 		return dx == 0 ? this.y - other.y : (dx + this.y - other.y) == 0 ? -1 : (dx + this.y - other.y);
 	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
 }

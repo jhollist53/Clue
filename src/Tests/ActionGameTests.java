@@ -248,5 +248,18 @@ public class ActionGameTests {
 		assertEquals(answerSet, game.handleSuggestion(mustardCard, billiardRoomCard, leadPipeCard, player1));
 		
 	}
+	
+	//This test ensures that that the room guessed is the room the player currently resides in.
+	@Test
+	public void correctRoomTest() {
+		ComputerPlayer player =  new ComputerPlayer();
+		player.updateSeen(scarletCard);
+		player.updateSeen(billiardRoomCard);
+		player.updateSeen(leadPipeCard);
+		
+		ArrayList<Card> suggestion = player.createSuggestion(new RoomCell(3, 7, 'R', RoomCell.DoorDirection.UP));
+		
+		assertTrue(billiardRoomCard.equals(suggestion.get(2)));
+	}
 
 }

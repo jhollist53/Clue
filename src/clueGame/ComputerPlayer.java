@@ -6,6 +6,8 @@ import java.util.Set;
 
 public class ComputerPlayer extends Player {
 	
+	private ArrayList<Card> seen =  new ArrayList<Card>();
+	
 	public ComputerPlayer() {
 		super();
 	}
@@ -45,9 +47,14 @@ public class ComputerPlayer extends Player {
 
 	}
 	
-	private void createSuggestion() {}
+	public ArrayList<Card> createSuggestion(RoomCell location) {
+		
+		return new ArrayList<Card>();
+	}
 	
-	private void updateSeen(Card seen) {}
+	public void updateSeen(Card seen) {
+		this.seen.add(seen);
+	}
 	
 	//For testing purpose only.
 	public void setLastRoomVisited(char l) {

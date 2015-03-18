@@ -141,7 +141,15 @@ public class ClueGame {
 	public void selectAnswer() {}
 	
 	public HashSet<Card> handleSuggestion( Card person, Card room, Card weapon, Player accusingPlayer ) {
-		return new HashSet<Card>();
+		HashSet<Card> revealed = new HashSet<Card>();
+		
+		for (Player p: players) {
+			if (p != accusingPlayer) {
+				revealed.add(p.disproveSuggestion(person, weapon, room));
+			}
+		}
+		
+		return revealed;
 	}
 	
 	public boolean checkAccusation(Solution solutionPossible) { 

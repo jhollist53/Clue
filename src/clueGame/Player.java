@@ -1,5 +1,8 @@
 package clueGame;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 public class Player {
@@ -33,7 +36,20 @@ public class Player {
 	}
 
 	public Card disproveSuggestion(Card person, Card weapon, Card room) {
-		return null;
+		ArrayList<Card> possibleReturnValues =  new ArrayList<Card>();
+		Random rnd = new Random();
+		
+		for (Card c: cards) {
+			if (c.equals(person) || c.equals(weapon) || c.equals(room)) {
+				possibleReturnValues.add(c);
+			}
+		}
+		
+		if (!possibleReturnValues.isEmpty()) {
+			return possibleReturnValues.get(rnd.nextInt(possibleReturnValues.size()));
+		} else {
+			return null;
+		}
 	}
 
 	public String getName() {

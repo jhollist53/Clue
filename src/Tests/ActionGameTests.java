@@ -68,10 +68,6 @@ public class ActionGameTests {
 	public void checkRoomIsChosen() {
 		board.calcTargets(mustardPlayer.getStartCol(), mustardPlayer.getStartRow(), 4);
 		
-		for (BoardCell b: board.getTargets()) {
-			System.out.println(b.getX()+ " " + b.getY());
-		}
-		
 		for (int i = 0; i < 25; i++) {
 			assertTrue(mustardPlayer.pickLocation(board.getTargets()) instanceof RoomCell);
 		}
@@ -231,19 +227,24 @@ public class ActionGameTests {
 		
 		//No person responds
 		HashSet<Card> answerSet = new HashSet<Card>();
+		answerSet.add(null);
 		assertEquals(answerSet, game.handleSuggestion(greenCard, billiardRoomCard, leadPipeCard, player1) );
 		
 		//Last person responds
+		answerSet.clear();
 		answerSet.add(scarletCard);
+		answerSet.add(null);
 		assertEquals(answerSet, game.handleSuggestion(scarletCard, billiardRoomCard, leadPipeCard, player1));
 		
 		//Human player responds
 		answerSet.clear();
+		answerSet.add(null);
 		answerSet.add(mustardCard);
 		assertEquals(answerSet, game.handleSuggestion(mustardCard, billiardRoomCard, leadPipeCard, player4));
 		
 		//Asking player does not have to reveal their own card.
 		answerSet.clear();
+		answerSet.add(null);
 		assertEquals(answerSet, game.handleSuggestion(mustardCard, billiardRoomCard, leadPipeCard, player1));
 		
 	}

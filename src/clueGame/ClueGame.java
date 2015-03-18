@@ -19,6 +19,7 @@ public class ClueGame {
 	private Board board;
 	private ArrayList<Player> players;
 	private ArrayList<Card> deck;
+	private Solution solution;
 	
 	public ClueGame(String configFile, String legendFile) {
 		this.configFile = configFile;
@@ -136,11 +137,17 @@ public class ClueGame {
 		}
 	}
 	
-	private void selectAnswer() {}
+	public void selectAnswer() {}
 	
-	private void handleSuggestion( String person, String room, String weapon, Player accusingPlayer ) {}
+	public void handleSuggestion( String person, String room, String weapon, Player accusingPlayer ) {
+	}
 	
-	private void checkAccusation(Solution solution) {}
+	public boolean checkAccusation(Solution solution) { return true; }
+
+	//Used for testing purposes.
+	public void setSolution(String person, String weapon, String room) {
+		solution = new Solution(person, weapon, room );
+	}
 	
 	
 }

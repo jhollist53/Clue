@@ -12,4 +12,18 @@ public class Solution {
 		this.room = room;
 	}
 
+	public String getPerson() {
+		return person;
+	}
+
+	public String getWeapon() {
+		return weapon;
+	}
+
+	public String getRoom() {
+		return room;
+	}
+	
+	
+
 }

@@ -142,7 +142,11 @@ public class ClueGame {
 	public void handleSuggestion( String person, String room, String weapon, Player accusingPlayer ) {
 	}
 	
-	public boolean checkAccusation(Solution solution) { return true; }
+	public boolean checkAccusation(Solution solutionPossible) { 
+		
+		return solutionPossible.getPerson().equals(solution.getPerson()) && solutionPossible.getRoom().equals(solution.getRoom()) &&
+				solutionPossible.getWeapon().equals(solution.getWeapon());
+	}
 
 	//Used for testing purposes.
 	public void setSolution(String person, String weapon, String room) {

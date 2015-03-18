@@ -5,6 +5,10 @@ import java.util.Random;
 import java.util.Set;
 
 public class ComputerPlayer extends Player {
+	
+	public ComputerPlayer() {
+		super();
+	}
 
 	public ComputerPlayer(String name, String color, int startCol, int startRow) {
 		super(name, color, startCol, startRow);

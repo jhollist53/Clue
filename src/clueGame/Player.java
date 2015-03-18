@@ -10,6 +10,13 @@ public class Player {
 	protected int startCol;
 	protected int startRow;
 	
+	public Player() {
+		name = "";
+		color = "";
+		startCol = 0;
+		startRow = 0;
+	}
+	
 	public Player( String name, String color, int startRow, int startCol) {
 		this.name = name;
 		this.color = color;
@@ -25,7 +32,7 @@ public class Player {
 		return startRow;
 	}
 
-	public Card disproveSuggestion(String person, String weapon, String room) {
+	public Card disproveSuggestion(Card person, Card weapon, Card room) {
 		return null;
 	}
 

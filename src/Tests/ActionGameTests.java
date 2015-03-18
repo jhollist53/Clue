@@ -2,6 +2,9 @@ package Tests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -10,6 +13,8 @@ import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.ClueGame;
 import clueGame.ComputerPlayer;
+import clueGame.HumanPlayer;
+import clueGame.Player;
 import clueGame.RoomCell;
 import clueGame.Solution;
 
@@ -21,6 +26,7 @@ public class ActionGameTests {
 	private static Card revolverCard = new Card("Revolver", Card.cardType.WEAPON);
 	private static Card kitchenCard = new Card("Kitchen", Card.cardType.ROOM);
 	private static Card scarletCard = new Card("Miss Scarlet", Card.cardType.PERSON);
+	private static Card greenCard = new Card("Mr. Green", Card.cardType.PERSON);
 	private static Card leadPipeCard =  new Card("Lead Pipe", Card.cardType.WEAPON);
 	private static Card billiardRoomCard =  new Card("Billiard Room", Card.cardType.ROOM);
 	private static ComputerPlayer mustardPlayer = new ComputerPlayer("Colonel Mustard", "Yellow", 0, 17);
@@ -138,9 +144,108 @@ public class ActionGameTests {
 		// Ensure we have 100 total selections (fail should also ensure)
 		assertEquals(100, dTotal + kTotal);
 		// Ensure each target was selected more than once
-		assertTrue(kTotal > 0);
+		assertTrue(kTotal > 25);
 		assertTrue(dTotal > 25);
 	
+	}
+	
+	//This test will ensure that a single player will return one card if that player has just one card that matches the suggestion
+	@Test
+	public void testOneCardSuggestion() {
+		HashSet<Card> specificDeal = new HashSet<Card>();
+		specificDeal.add(mustardCard);
+		specificDeal.add(revolverCard);
+		specificDeal.add(kitchenCard);
+		mustardPlayer.setCards(specificDeal);
+		
+		assertEquals(kitchenCard, mustardPlayer.disproveSuggestion(scarletCard, leadPipeCard, kitchenCard));
+		assertEquals(revolverCard, mustardPlayer.disproveSuggestion(scarletCard, revolverCard, billiardRoomCard));
+		assertEquals(mustardCard, mustardPlayer.disproveSuggestion(mustardCard, leadPipeCard, billiardRoomCard));
+		assertEquals(null, mustardPlayer.disproveSuggestion(scarletCard, leadPipeCard, billiardRoomCard));
+	}
+	
+	//This test will ensure that when multiple cards can be suggested that the the choice is at least semirandom
+	@Test
+	public void testMultipleCardSuggestion() {
+		HashSet<Card> specificDeal = new HashSet<Card>();
+		specificDeal.add(mustardCard);
+		specificDeal.add(revolverCard);
+		specificDeal.add(kitchenCard);
+		mustardPlayer.setCards(specificDeal);
+		
+		int personTot = 0;
+		int weaponTot = 0;
+		int roomTot = 0;
+		
+		for (int i = 0; i < 100; i++) {
+			Card returnCard = mustardPlayer.disproveSuggestion(mustardCard, revolverCard, kitchenCard);
+			if (returnCard.equals(mustardCard))
+				personTot++;
+			else if (returnCard.equals(revolverCard))
+				weaponTot++;
+			else if (returnCard.equals(kitchenCard))
+				roomTot++;
+			else
+				fail("Not possible to return otherwise");
+		}
+		
+		assertEquals(100, personTot + weaponTot + roomTot);
+		
+		assertTrue(personTot > 10);
+		assertTrue(weaponTot > 10);
+		assertTrue(roomTot > 10);
+	}
+	
+	//Ensure that the system will work for more than one player. All players except the calling player must be tested.
+	@Test
+	public void testMultiplePlayers () {
+		HashSet<Card> specificDeal = new HashSet<Card>();
+		HashSet<Card> specificDeal1 = new HashSet<Card>();
+		HashSet<Card> specificDeal2 = new HashSet<Card>();
+		HashSet<Card> specificDeal3 = new HashSet<Card>();
+		
+		specificDeal.add(mustardCard);
+		specificDeal1.add(revolverCard);
+		specificDeal2.add(kitchenCard);
+		specificDeal3.add(scarletCard);
+		
+		HumanPlayer player1 =  new HumanPlayer();
+		player1.setCards(specificDeal);
+		
+		ComputerPlayer player2 = new ComputerPlayer();
+		player2.setCards(specificDeal1);
+		
+		ComputerPlayer player3 = new ComputerPlayer();
+		player3.setCards(specificDeal2);
+		
+		ComputerPlayer player4 = new ComputerPlayer();
+		player4.setCards(specificDeal3);
+		
+		HashSet<Player> playersList = new HashSet<Player>();
+		playersList.add(player1);
+		playersList.add(player2);
+		playersList.add(player3);
+		playersList.add(player4);
+		
+		game.setPlayers(playersList);
+		
+		//No person responds
+		HashSet<Card> answerSet = new HashSet<Card>();
+		assertEquals(answerSet, game.handleSuggestion(greenCard, billiardRoomCard, leadPipeCard, player1) );
+		
+		//Last person responds
+		answerSet.add(scarletCard);
+		assertEquals(answerSet, game.handleSuggestion(scarletCard, billiardRoomCard, leadPipeCard, player1));
+		
+		//Human player responds
+		answerSet.clear();
+		answerSet.add(mustardCard);
+		assertEquals(answerSet, game.handleSuggestion(mustardCard, billiardRoomCard, leadPipeCard, player4));
+		
+		//Asking player does not have to reveal their own card.
+		answerSet.clear();
+		assertEquals(answerSet, game.handleSuggestion(mustardCard, billiardRoomCard, leadPipeCard, player1));
+		
 	}
 
 }

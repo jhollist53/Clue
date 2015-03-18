@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 public class ClueGame {
 	private Map<Character, String> rooms;
@@ -139,7 +140,8 @@ public class ClueGame {
 	
 	public void selectAnswer() {}
 	
-	public void handleSuggestion( String person, String room, String weapon, Player accusingPlayer ) {
+	public HashSet<Card> handleSuggestion( Card person, Card room, Card weapon, Player accusingPlayer ) {
+		return new HashSet<Card>();
 	}
 	
 	public boolean checkAccusation(Solution solutionPossible) { 
@@ -151,6 +153,14 @@ public class ClueGame {
 	//Used for testing purposes.
 	public void setSolution(String person, String weapon, String room) {
 		solution = new Solution(person, weapon, room );
+	}
+	
+	public void setPlayers( Set<Player> players) {
+		this.players.clear();
+		
+		for (Player e: players) {
+			this.players.add(e);
+		}
 	}
 	
 	

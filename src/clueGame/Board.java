@@ -1,5 +1,9 @@
 package clueGame;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,23 +17,33 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import clueGame.RoomCell.DoorDirection;
 
-public class Board {
+public class Board extends JPanel{
+	public static final int sqsize = 30; 
 	private ArrayList<ArrayList<BoardCell>> boardLayout;
-	private int xDim, yDim;
+	public static int xDim, yDim;
 	private Map<Character, String> rooms;
 	private HashMap<BoardCell, LinkedList<BoardCell>> adjacencies;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
+	private Graphics gr123;
 	
 	public Board() {
+		
+		
 		boardLayout = new ArrayList<ArrayList<BoardCell>>();
 		adjacencies = new HashMap<BoardCell, LinkedList<BoardCell>>();
-		rooms = new HashMap<Character, String>();
+		rooms = new HashMap<Character, String>(); 
+
 	}
 
 	public void loadBoardConfig (String configFile, Map<Character, String> rooms) {
+
+		
 		readBoardFromFile(configFile);
 		try{
 			verifyBoard();
@@ -38,6 +52,8 @@ public class Board {
 			System.out.println(e);
 		}
 		this.rooms = rooms;
+		setSize(sqsize*xDim, sqsize*yDim); 
+		
 	}
 	/*
 	public void testLoadBoardConfig(String configFile) throws BadConfigFormatException{
@@ -53,6 +69,9 @@ public class Board {
 			FileReader fReader = new FileReader(file);
 			BufferedReader bReader = new BufferedReader(fReader);
 			String temp;
+			
+			
+			
 			while((temp = bReader.readLine()) != null){
 				//Regular expression, matches any leading whitespace, trailing whitespace, then any other leading whitespace.
 				boardLayout.add(new ArrayList<BoardCell>());
@@ -243,7 +262,21 @@ public class Board {
 	}
 	
 	public void startTarget( int row, int col, int numSteps) {}
-
+	
+	public void paintComponent(Graphics g){
+		gr123=g;
+		super.paintComponent(g);
+		for(ArrayList<BoardCell> a : boardLayout){
+			for(BoardCell b:a){
+				b.draw(g);
+			}
+		}
+		
+		for (Player a: ClueGame.players){
+			a.draw(g);
+		}
+	}
+	
 
 }
 

@@ -1,5 +1,8 @@
 package clueGame;
 
+import java.awt.Color;
+import java.lang.reflect.*;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -11,6 +14,7 @@ public class Player {
 	protected Set<Card> cards;
 	protected String color;
 	protected int startCol;
+	protected Color colorColor;
 	protected int startRow;
 	
 	public Player() {
@@ -75,6 +79,27 @@ public class Player {
 			return player.name.equals(name) && player.color.equals(color) && player.startCol == startCol && player.startRow == startRow;
 		}
 		return false;
+	}
+	
+	public Color convertColor(String strColor) {
+		Color color; 
+		try {     
+			// We can use reflection to convert the string to a color
+			Field field = Class.forName("java.awt.Color").getField(strColor.trim());     
+			color = (Color)field.get(null); } 
+		catch (Exception e) {  
+			color = null; // Not defined } 
+		}
+		return color;
+	}
+	
+	public void draw(Graphics g)
+	{
+		colorColor = convertColor(color);
+		
+		g.setColor(colorColor);
+		
+		g.fillOval((startCol)*Board.sqsize, startRow*Board.sqsize, Board.sqsize-1, Board.sqsize-1);
 	}
 	
 

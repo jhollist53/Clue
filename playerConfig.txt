@@ -1,24 +1,24 @@
 Mrs. Peacock
-Blue
+BLUE
 0
 7
 Mr. Green
-Green
+GREEN
 22
 10
 Colonel Mustard
-Yellow
+YELLOW
 0
 17
 Miss Scarlet
-Red
+RED
 5
 26
 Professor Plum
-Purple
+MAGENTA
 22
 17
 Ms. White
-White
+WHITE
 5
 0

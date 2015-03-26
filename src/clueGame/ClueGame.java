@@ -1,5 +1,8 @@
 package clueGame;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,11 +17,16 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
-public class ClueGame {
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+public class ClueGame extends JFrame{
 	private Map<Character, String> rooms;
 	private String configFile, legendFile;
 	private Board board;
-	private ArrayList<Player> players;
+	public static ArrayList<Player> players;
 	private ArrayList<Card> deck;
 	private Solution solution;
 	
@@ -26,6 +34,9 @@ public class ClueGame {
 		this.configFile = configFile;
 		this.legendFile = legendFile;
 		board = new Board();
+		add(board);
+
+		
 		deck = new ArrayList<Card>();
 		rooms = new HashMap<Character, String>();
 		players = new ArrayList<Player>();
@@ -170,6 +181,54 @@ public class ClueGame {
 			this.players.add(e);
 		}
 	}
+	
+	public static void main(String[] args) {
+		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
+		game.loadConfigFiles();
+		game.setSize(Board.sqsize*Board.xDim+15, Board.sqsize*Board.yDim+60);  
+		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		game.createFileMenu();
+		game.setVisible(true);
+	}
+	
+	private JMenu createFileMenu()
+	{
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+
+		JMenu menu = new JMenu("File"); 
+		menu.add(createFileExitItem());
+		menuBar.add(menu);
+		return menu;
+	}
+	
+	private JMenuItem DetectiveNotes()
+	{
+	  JMenuItem item = new JMenuItem("Notes");
+	  class MenuItemListener implements ActionListener {
+	    public void actionPerformed(ActionEvent e)
+	    {
+	       System.exit(0);
+	    }
+	  }
+	  item.addActionListener(new MenuItemListener());
+	  return item;
+	}
+	
+	private JMenuItem createFileExitItem()
+	{
+	  JMenuItem item = new JMenuItem("Exit");
+	  class MenuItemListener implements ActionListener {
+	    public void actionPerformed(ActionEvent e)
+	    {
+	       System.exit(0);
+	    }
+	  }
+	  item.addActionListener(new MenuItemListener());
+	  return item;
+	}
+	
+
 	
 	
 }

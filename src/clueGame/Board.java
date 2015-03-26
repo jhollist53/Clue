@@ -23,7 +23,7 @@ import javax.swing.JPanel;
 import clueGame.RoomCell.DoorDirection;
 
 public class Board extends JPanel{
-	public static final int sqsize = 30; 
+	public static final int sqsize = 35; 
 	private ArrayList<ArrayList<BoardCell>> boardLayout;
 	public static int xDim, yDim;
 	private Map<Character, String> rooms;

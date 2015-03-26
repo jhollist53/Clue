@@ -11,16 +11,13 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class ControlGUI extends JFrame {
+public class ControlGUI extends JPanel {
 	private JTextField name;
 
 	public ControlGUI()
 	{
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Control GUI");
 		setSize(600, 200);
 		setLayout(new GridLayout(3,3));
-		setResizable(false);
 		JPanel panel = createWhoseTurnPanel();
 		add(panel);
 		panel = createOutPanels();

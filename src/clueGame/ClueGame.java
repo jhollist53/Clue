@@ -34,8 +34,8 @@ public class ClueGame extends JFrame{
 		this.configFile = configFile;
 		this.legendFile = legendFile;
 		board = new Board();
-		add(board);
-
+		add(board,BorderLayout.CENTER);
+		add(new ControlGUI(),BorderLayout.SOUTH);
 		
 		deck = new ArrayList<Card>();
 		rooms = new HashMap<Character, String>();

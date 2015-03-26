@@ -33,10 +33,5 @@ private class TimerListener implements ActionListener {
 		// TODO Auto-generated method stub
 		
 	} }
-	/*public static void main(String[] args) {
-		BoardGUI frame = new BoardGUI();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-		//frame.updateDrawing(5, 10);
-	}*/
+
 }

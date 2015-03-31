@@ -55,11 +55,6 @@ public class Board extends JPanel{
 		setSize(sqsize*xDim, sqsize*yDim); 
 		
 	}
-	/*
-	public void testLoadBoardConfig(String configFile) throws BadConfigFormatException{
-		readBoardFromFile(configFile);
-		verifyBoard();
-	}*/
 
 	private void readBoardFromFile(String inFile){
 		//Reads data from file, line by line.
@@ -157,9 +152,9 @@ public class Board extends JPanel{
 		}
 	}
 	public void calcAdjacencies() {
-		//This has turned into total software gore...
 		for(int x = 0; x < xDim; x++){
 			for(int y = 0; y < yDim; y++){
+/*<<<<<<< HEAD
 				LinkedList<BoardCell> ll = new LinkedList<BoardCell>();
 				if(getCellAt(x,y).isWalkway()){
 					if(y-1 >= 0){
@@ -210,8 +205,74 @@ public class Board extends JPanel{
 					}
 				}
 				adjacencies.put(getCellAt(x,y), ll);
+=======*/
+				LinkedList<BoardCell> adjacencyList = new LinkedList<BoardCell>();
+				if(boardLayout.get(x).get(y).isWalkway()){
+					checkAdjWalkways(x,y,adjacencyList);
+				}
+				else if(boardLayout.get(x).get(y).isDoorway()){
+					checkAdjDoorways(x,y,adjacencyList);
+				}
+				adjacencies.put(boardLayout.get(x).get(y), adjacencyList);
+//>>>>>>> a9b2d340d3b13dc408550723e2bc17ba4021dc9e
 			}
 		}
+	}
+
+	private LinkedList<BoardCell> checkAdjDoorways(int x, int y,
+			LinkedList<BoardCell> adjacencyList) {
+		if(y-1 >= 0){
+			if(boardLayout.get(x).get(y-1).isWalkway()) { 
+				adjacencyList.addLast(boardLayout.get(x).get(y-1));
+			}
+		}
+		if(x+1 < xDim){
+			if(boardLayout.get(x+1).get(y).isWalkway()) {
+				adjacencyList.addLast(boardLayout.get(x+1).get(y));
+			}
+		}
+		if(y+1 < yDim){
+			if(boardLayout.get(x).get(y+1).isWalkway()) {
+				adjacencyList.addLast(boardLayout.get(x).get(y+1));
+			}
+		}
+		if(x-1 >= 0){
+			if(boardLayout.get(x-1).get(y).isWalkway()) {
+				adjacencyList.addLast(boardLayout.get(x-1).get(y));
+			}
+		}
+		return adjacencyList;
+		
+	}
+
+	private LinkedList<BoardCell> checkAdjWalkways(int x, int y,
+			LinkedList<BoardCell> adjacencyList) {
+			if(y-1 >= 0){
+				if(boardLayout.get(x).get(y-1).isWalkway() 
+						|| boardLayout.get(x).get(y-1).isDoorway()){
+					adjacencyList.addLast(boardLayout.get(x).get(y-1));
+				}
+			}
+			if(x+1 < xDim){
+				if(boardLayout.get(x+1).get(y).isWalkway() 
+						|| boardLayout.get(x+1).get(y).isDoorway()){
+					adjacencyList.addLast(boardLayout.get(x+1).get(y));
+				}
+			}
+			if(y+1 < yDim){
+				if(boardLayout.get(x).get(y+1).isWalkway() 
+						|| boardLayout.get(x).get(y+1).isDoorway()){
+					adjacencyList.addLast(boardLayout.get(x).get(y+1));
+				}
+			}
+			if(x-1 >= 0){
+				if(boardLayout.get(x-1).get(y).isWalkway() 
+						|| boardLayout.get(x-1).get(y).isDoorway()){
+					adjacencyList.addLast(boardLayout.get(x-1).get(y));
+				}
+			}
+		return adjacencyList;
+		
 	}
 
 	public LinkedList<BoardCell> getAdjList(int x, int y) {

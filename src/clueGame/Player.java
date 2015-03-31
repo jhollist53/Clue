@@ -88,7 +88,7 @@ public class Player {
 			Field field = Class.forName("java.awt.Color").getField(strColor.trim());     
 			color = (Color)field.get(null); } 
 		catch (Exception e) {  
-			color = null; // Not defined } 
+			color = null; // Not defined 
 		}
 		return color;
 	}

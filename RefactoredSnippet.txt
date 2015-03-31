@@ -1,0 +1,78 @@
+//Before refactor
+
+	public void calcAdjacencies() {
+		for(int x = 0; x < xDim; x++){
+			for(int y = 0; y < yDim; y++){
+				LinkedList<BoardCell> adjacencyList = new LinkedList<BoardCell>();
+				if(boardLayout.get(x).get(y).isWalkway()){
+					if(y-1 >= 0){
+						if(boardLayout.get(x).get(y-1).isWalkway() 
+								|| boardLayout.get(x).get(y-1).isDoorway()){
+							adjacencyList.addLast(boardLayout.get(x).get(y-1));
+						}
+					}
+					if(x+1 < xDim){
+						if(boardLayout.get(x+1).get(y).isWalkway() 
+								|| boardLayout.get(x+1).get(y).isDoorway()){
+							adjacencyList.addLast(boardLayout.get(x+1).get(y));
+						}
+					}
+					if(y+1 < yDim){
+						if(boardLayout.get(x).get(y+1).isWalkway() 
+								|| boardLayout.get(x).get(y+1).isDoorway()){
+							adjacencyList.addLast(boardLayout.get(x).get(y+1));
+						}
+					}
+					if(x-1 >= 0){
+						if(boardLayout.get(x-1).get(y).isWalkway() 
+								|| boardLayout.get(x-1).get(y).isDoorway()){
+							adjacencyList.addLast(boardLayout.get(x-1).get(y));
+						}
+					}
+				}
+				else if(boardLayout.get(x).get(y).isDoorway()){
+					if(y-1 >= 0){
+						if(boardLayout.get(x).get(y-1).isWalkway()) { 
+							adjacencyList.addLast(boardLayout.get(x).get(y-1));
+						}
+					}
+					if(x+1 < xDim){
+						if(boardLayout.get(x+1).get(y).isWalkway()) {
+							adjacencyList.addLast(boardLayout.get(x+1).get(y));
+						}
+					}
+					if(y+1 < yDim){
+						if(boardLayout.get(x).get(y+1).isWalkway()) {
+							adjacencyList.addLast(boardLayout.get(x).get(y+1));
+						}
+					}
+					if(x-1 >= 0){
+						if(boardLayout.get(x-1).get(y).isWalkway()) {
+							adjacencyList.addLast(boardLayout.get(x-1).get(y));
+						}
+					}
+				}
+				adjacencies.put(boardLayout.get(x).get(y), adjacencyList);
+			}
+		}
+	}
+	
+	
+	
+//After refactor
+
+		public void calcAdjacencies() {
+		for(int x = 0; x < xDim; x++){
+			for(int y = 0; y < yDim; y++){
+				LinkedList<BoardCell> adjacencyList = new LinkedList<BoardCell>();
+				if(boardLayout.get(x).get(y).isWalkway()){
+					checkAdjWalkways(x,y,adjacencyList);
+				}
+				else if(boardLayout.get(x).get(y).isDoorway()){
+					checkAdjDoorways(x,y,adjacencyList);
+				}
+				adjacencies.put(boardLayout.get(x).get(y), adjacencyList);
+			}
+		}
+	}
+	

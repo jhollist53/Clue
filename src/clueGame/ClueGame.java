@@ -96,8 +96,7 @@ public class ClueGame extends JFrame{
 	
 	private void loadPlayers() throws FileNotFoundException {
 		
-		FileReader reader = null;
-		reader = new FileReader("playerConfig.txt");
+		FileReader reader = new FileReader("playerConfig.txt");
 		
 		Scanner s = new Scanner(reader);
 		for(int i = 0; i < 6; i++) {
@@ -116,8 +115,7 @@ public class ClueGame extends JFrame{
 	
 	public void loadCards() throws FileNotFoundException {
 		
-		FileReader reader = null;
-		reader = new FileReader("cards.txt");
+		FileReader reader = new FileReader("cards.txt");
 		
 		Scanner s = new Scanner(reader);
 		int i = 0;

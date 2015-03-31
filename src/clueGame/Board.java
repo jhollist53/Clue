@@ -47,7 +47,7 @@ public class Board extends JPanel{
 		readBoardFromFile(configFile);
 		try{
 			verifyBoard();
-			transposeBoard();
+			//transposeBoard();
 		} catch (BadConfigFormatException e) {
 			System.out.println(e);
 		}
@@ -120,17 +120,6 @@ public class Board extends JPanel{
 		}
 	}
 
-	public void transposeBoard(){
-		ArrayList<ArrayList<BoardCell>> temp = new ArrayList<ArrayList<BoardCell>>();
-		for (int i = 0; i < xDim; i++){
-			ArrayList<BoardCell> temp2 = new ArrayList<BoardCell>();
-			for (int j = 0; j < yDim; j ++){
-				temp2.add(boardLayout.get(j).get(i));
-			}
-			temp.add(temp2);
-		}
-		boardLayout = temp;
-	}
 
 	public ArrayList<ArrayList<BoardCell>> getBoardLayout() {
 		return boardLayout;
@@ -149,14 +138,14 @@ public class Board extends JPanel{
 	}
 
 	public RoomCell getRoomCellAt(int x, int y) {
-		if (boardLayout.get(x).get(y).isRoom()) {
-			return (RoomCell) boardLayout.get(x).get(y);
+		if (boardLayout.get(y).get(x).isRoom()) {
+			return (RoomCell) boardLayout.get(y).get(x);
 		}
 		return null;
 	}
 
 	public BoardCell getCellAt(int x, int y) {
-		return boardLayout.get(x).get(y);
+		return boardLayout.get(y).get(x);
 	}
 
 	public void VerifyBoard() throws BadConfigFormatException{
@@ -172,61 +161,61 @@ public class Board extends JPanel{
 		for(int x = 0; x < xDim; x++){
 			for(int y = 0; y < yDim; y++){
 				LinkedList<BoardCell> ll = new LinkedList<BoardCell>();
-				if(boardLayout.get(x).get(y).isWalkway()){
+				if(getCellAt(x,y).isWalkway()){
 					if(y-1 >= 0){
-						if(boardLayout.get(x).get(y-1).isWalkway() 
-								|| boardLayout.get(x).get(y-1).isDoorway()){
-							ll.addLast(boardLayout.get(x).get(y-1));
+						if(getCellAt(x,y-1).isWalkway() 
+								|| getCellAt(x,y-1).isDoorway()){
+							ll.addLast(getCellAt(x,y-1));
 						}
 					}
 					if(x+1 < xDim){
-						if(boardLayout.get(x+1).get(y).isWalkway() 
-								|| boardLayout.get(x+1).get(y).isDoorway()){
-							ll.addLast(boardLayout.get(x+1).get(y));
+						if(getCellAt(x+1,y).isWalkway() 
+								|| getCellAt(x+1,y).isDoorway()){
+							ll.addLast(getCellAt(x+1,y));
 						}
 					}
 					if(y+1 < yDim){
-						if(boardLayout.get(x).get(y+1).isWalkway() 
-								|| boardLayout.get(x).get(y+1).isDoorway()){
-							ll.addLast(boardLayout.get(x).get(y+1));
+						if(getCellAt(x,y+1).isWalkway() 
+								|| getCellAt(x,y+1).isDoorway()){
+							ll.addLast(getCellAt(x,y+1));
 						}
 					}
 					if(x-1 >= 0){
-						if(boardLayout.get(x-1).get(y).isWalkway() 
-								|| boardLayout.get(x-1).get(y).isDoorway()){
-							ll.addLast(boardLayout.get(x-1).get(y));
+						if(getCellAt(x-1,y).isWalkway() 
+								|| getCellAt(x-1,y).isDoorway()){
+							ll.addLast(getCellAt(x-1,y));
 						}
 					}
 				}
-				else if(boardLayout.get(x).get(y).isDoorway()){
+				else if(getCellAt(x,y).isDoorway()){
 					if(y-1 >= 0){
-						if(boardLayout.get(x).get(y-1).isWalkway()) { 
-							ll.addLast(boardLayout.get(x).get(y-1));
+						if(getCellAt(x,y-1).isWalkway()) { 
+							ll.addLast(getCellAt(x,y-1));
 						}
 					}
 					if(x+1 < xDim){
-						if(boardLayout.get(x+1).get(y).isWalkway()) {
-							ll.addLast(boardLayout.get(x+1).get(y));
+						if(getCellAt(x+1,y).isWalkway()) {
+							ll.addLast(getCellAt(x+1,y));
 						}
 					}
 					if(y+1 < yDim){
-						if(boardLayout.get(x).get(y+1).isWalkway()) {
-							ll.addLast(boardLayout.get(x).get(y+1));
+						if(getCellAt(x,y+1).isWalkway()) {
+							ll.addLast(getCellAt(x,y+1));
 						}
 					}
 					if(x-1 >= 0){
-						if(boardLayout.get(x-1).get(y).isWalkway()) {
-							ll.addLast(boardLayout.get(x-1).get(y));
+						if(getCellAt(x-1,y).isWalkway()) {
+							ll.addLast(getCellAt(x-1,y));
 						}
 					}
 				}
-				adjacencies.put(boardLayout.get(x).get(y), ll);
+				adjacencies.put(getCellAt(x,y), ll);
 			}
 		}
 	}
 
 	public LinkedList<BoardCell> getAdjList(int x, int y) {
-		return adjacencies.get(boardLayout.get(x).get(y));
+		return adjacencies.get(getCellAt(x,y));
 	}
 
 	public void calcTargets(int x, int y, int len) {

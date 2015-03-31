@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -17,10 +18,16 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class ClueGame extends JFrame{
 	private Map<Character, String> rooms;
@@ -185,7 +192,7 @@ public class ClueGame extends JFrame{
 	public static void main(String[] args) {
 		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
 		game.loadConfigFiles();
-		game.setSize(Board.sqsize*Board.xDim+15, Board.sqsize*Board.yDim+60);  
+		game.setSize(Board.sqsize*Board.xDim+15, 6*Board.sqsize*Board.yDim/5+Board.sqsize-2);  
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.createFileMenu();
 		game.setVisible(true);
@@ -197,6 +204,7 @@ public class ClueGame extends JFrame{
 		setJMenuBar(menuBar);
 
 		JMenu menu = new JMenu("File"); 
+		menu.add(DetectiveNotes());
 		menu.add(createFileExitItem());
 		menuBar.add(menu);
 		return menu;
@@ -205,15 +213,94 @@ public class ClueGame extends JFrame{
 	private JMenuItem DetectiveNotes()
 	{
 	  JMenuItem item = new JMenuItem("Notes");
+	  
+	  JDialog notes = new JDialog();
+	  notes.setDefaultCloseOperation(HIDE_ON_CLOSE);
+	  notes.setLayout(new GridLayout(3,3));
+	  
+	  JPanel people = new JPanel();
+	  people.setLayout(new GridLayout(3,2));
+	  people.add(new JRadioButton("Miss Scarlet"));
+	  people.add(new JRadioButton("Mr. Green"));
+	  people.add(new JRadioButton("Colonel Mustard"));
+	  people.add(new JRadioButton("Mrs. Peacock"));
+	  people.add(new JRadioButton("Mrs. White"));
+	  people.add(new JRadioButton("Professor Plumb"));
+	  people.setBorder(new TitledBorder (new EtchedBorder(), "People"));
+	  notes.add(people);
+	  
+	  JPanel rooms = new JPanel();
+	  rooms.setLayout(new GridLayout(5,2));
+	  rooms.add(new JRadioButton("Conservatory"));
+	  rooms.add(new JRadioButton("Kitchen"));
+	  rooms.add(new JRadioButton("Ballroom"));
+	  rooms.add(new JRadioButton("Billiard Room"));
+	  rooms.add(new JRadioButton("Library"));
+	  rooms.add(new JRadioButton("Study"));
+	  rooms.add(new JRadioButton("Lounge"));
+	  rooms.add(new JRadioButton("Dining Room"));
+	  rooms.add(new JRadioButton("Hall"));
+	  rooms.setBorder(new TitledBorder (new EtchedBorder(), "Rooms"));
+	  notes.add(rooms);
+	  
+	  JPanel weapons = new JPanel();
+	  weapons.setLayout(new GridLayout(3,2));
+	  weapons.add(new JRadioButton("Wrench"));
+	  weapons.add(new JRadioButton("Revolver"));
+	  weapons.add(new JRadioButton("Candlestick"));
+	  weapons.add(new JRadioButton("Lead Pipe"));
+	  weapons.add(new JRadioButton("Rope"));
+	  weapons.add(new JRadioButton("Knife"));
+	  weapons.setBorder(new TitledBorder (new EtchedBorder(), "Weapons"));
+	  notes.add(weapons);
+	  
+	  JComboBox<String> persong = new JComboBox<String>();
+	  persong.addItem("Miss Scarlet");
+	  persong.addItem("Mr. Green");
+	  persong.addItem("Colonel Mustard");
+	  persong.addItem("Mrs. Peacock");
+	  persong.addItem("Mrs. White");
+	  persong.addItem("Professor Plumb");
+	  persong.setBorder(new TitledBorder (new EtchedBorder(), "Person Guess"));
+	  notes.add(persong);
+	  
+	  JComboBox<String> roomg = new JComboBox<String>();
+	  roomg.addItem("Conservatory");
+	  roomg.addItem("Kitchen");
+	  roomg.addItem("Ballroom");
+	  roomg.addItem("Billiard Room");
+	  roomg.addItem("Library");
+	  roomg.addItem("Study");
+	  roomg.addItem("Lounge");
+	  roomg.addItem("Dining Room");
+	  roomg.addItem("Hall");
+	  roomg.setBorder(new TitledBorder (new EtchedBorder(), "Room Guess"));
+	  notes.add(roomg);
+	  
+	  JComboBox<String> weapg = new JComboBox<String>();
+	  weapg.addItem("Wrench");
+	  weapg.addItem("Revolver");
+	  weapg.addItem("Candlestick");
+	  weapg.addItem("Lead Pipe");
+	  weapg.addItem("Rope");
+	  weapg.addItem("Knife");
+	  weapg.setBorder(new TitledBorder (new EtchedBorder(), "Weapon Guess"));
+	  notes.add(weapg);
+	  
+	  
 	  class MenuItemListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e)
 	    {
-	       System.exit(0);
+	    	notes.setVisible(true);
 	    }
 	  }
 	  item.addActionListener(new MenuItemListener());
 	  return item;
 	}
+	
+	
+	
+	
 	
 	private JMenuItem createFileExitItem()
 	{

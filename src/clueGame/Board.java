@@ -55,11 +55,6 @@ public class Board extends JPanel{
 		setSize(sqsize*xDim, sqsize*yDim); 
 		
 	}
-	/*
-	public void testLoadBoardConfig(String configFile) throws BadConfigFormatException{
-		readBoardFromFile(configFile);
-		verifyBoard();
-	}*/
 
 	private void readBoardFromFile(String inFile){
 		//Reads data from file, line by line.

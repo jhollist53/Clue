@@ -171,56 +171,56 @@ public class Board extends JPanel{
 		//This has turned into total software gore...
 		for(int x = 0; x < xDim; x++){
 			for(int y = 0; y < yDim; y++){
-				LinkedList<BoardCell> ll = new LinkedList<BoardCell>();
+				LinkedList<BoardCell> adjacencyList = new LinkedList<BoardCell>();
 				if(boardLayout.get(x).get(y).isWalkway()){
 					if(y-1 >= 0){
 						if(boardLayout.get(x).get(y-1).isWalkway() 
 								|| boardLayout.get(x).get(y-1).isDoorway()){
-							ll.addLast(boardLayout.get(x).get(y-1));
+							adjacencyList.addLast(boardLayout.get(x).get(y-1));
 						}
 					}
 					if(x+1 < xDim){
 						if(boardLayout.get(x+1).get(y).isWalkway() 
 								|| boardLayout.get(x+1).get(y).isDoorway()){
-							ll.addLast(boardLayout.get(x+1).get(y));
+							adjacencyList.addLast(boardLayout.get(x+1).get(y));
 						}
 					}
 					if(y+1 < yDim){
 						if(boardLayout.get(x).get(y+1).isWalkway() 
 								|| boardLayout.get(x).get(y+1).isDoorway()){
-							ll.addLast(boardLayout.get(x).get(y+1));
+							adjacencyList.addLast(boardLayout.get(x).get(y+1));
 						}
 					}
 					if(x-1 >= 0){
 						if(boardLayout.get(x-1).get(y).isWalkway() 
 								|| boardLayout.get(x-1).get(y).isDoorway()){
-							ll.addLast(boardLayout.get(x-1).get(y));
+							adjacencyList.addLast(boardLayout.get(x-1).get(y));
 						}
 					}
 				}
 				else if(boardLayout.get(x).get(y).isDoorway()){
 					if(y-1 >= 0){
 						if(boardLayout.get(x).get(y-1).isWalkway()) { 
-							ll.addLast(boardLayout.get(x).get(y-1));
+							adjacencyList.addLast(boardLayout.get(x).get(y-1));
 						}
 					}
 					if(x+1 < xDim){
 						if(boardLayout.get(x+1).get(y).isWalkway()) {
-							ll.addLast(boardLayout.get(x+1).get(y));
+							adjacencyList.addLast(boardLayout.get(x+1).get(y));
 						}
 					}
 					if(y+1 < yDim){
 						if(boardLayout.get(x).get(y+1).isWalkway()) {
-							ll.addLast(boardLayout.get(x).get(y+1));
+							adjacencyList.addLast(boardLayout.get(x).get(y+1));
 						}
 					}
 					if(x-1 >= 0){
 						if(boardLayout.get(x-1).get(y).isWalkway()) {
-							ll.addLast(boardLayout.get(x-1).get(y));
+							adjacencyList.addLast(boardLayout.get(x-1).get(y));
 						}
 					}
 				}
-				adjacencies.put(boardLayout.get(x).get(y), ll);
+				adjacencies.put(boardLayout.get(x).get(y), adjacencyList);
 			}
 		}
 	}

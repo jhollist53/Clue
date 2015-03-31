@@ -29,6 +29,8 @@ import javax.swing.JRadioButton;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import com.sun.prism.paint.Color;
+
 public class ClueGame extends JFrame{
 	private Map<Character, String> rooms;
 	private String configFile, legendFile;
@@ -215,6 +217,7 @@ public class ClueGame extends JFrame{
 	  JDialog notes = new JDialog();
 	  notes.setDefaultCloseOperation(HIDE_ON_CLOSE);
 	  notes.setLayout(new GridLayout(3,3));
+	  notes.setBounds(1000, 200, 600, 600);
 	  
 	  JPanel people = new JPanel();
 	  people.setLayout(new GridLayout(3,2));

@@ -32,11 +32,12 @@ import javax.swing.border.TitledBorder;
 import com.sun.prism.paint.Color;
 
 public class ClueGame extends JFrame{
+	private static Player currentPlayer;
 	private Map<Character, String> rooms;
 	private String configFile, legendFile;
 	private Board board;
 	public static ArrayList<Player> players;
-	private ArrayList<Card> deck;
+	private static ArrayList<Card> deck;
 	private Solution solution;
 	
 	public ClueGame(String configFile, String legendFile) {
@@ -101,8 +102,11 @@ public class ClueGame extends JFrame{
 		FileReader reader = new FileReader("playerConfig.txt");
 		
 		Scanner s = new Scanner(reader);
-		for(int i = 0; i < 6; i++) {
-			String key = s.nextLine();
+		String key = s.nextLine();
+		HumanPlayer Hplayer =  new HumanPlayer(key, s.nextLine(), Integer.parseInt(s.nextLine()), Integer.parseInt(s.nextLine()));
+		players.add(Hplayer);
+		for(int i = 1; i < 6; i++) {
+			key = s.nextLine();
 			Player player =  new Player(key, s.nextLine(), Integer.parseInt(s.nextLine()), Integer.parseInt(s.nextLine()));
 			players.add(player);
 		}
@@ -111,7 +115,7 @@ public class ClueGame extends JFrame{
 		
 	}
 	
-	public ArrayList<Card> getDeck() {
+	public static ArrayList<Card> getDeck() {
 		return deck;
 	}
 	
@@ -132,9 +136,12 @@ public class ClueGame extends JFrame{
 		}
 				
 		s.close();
+		
+		deal();
 	}
 	
 	public void deal() {
+		ArrayList<Card> deck2 = new ArrayList<Card>(deck);
 		ArrayList<HashSet<Card>> dealtCards = new ArrayList<HashSet<Card>>();
 		int position1 = 0, position2 = 0;
 		Random random = new Random();
@@ -143,10 +150,10 @@ public class ClueGame extends JFrame{
 			dealtCards.add(new HashSet<Card>());
 		}
 		
-		while(!deck.isEmpty()) {
-			int dealtCard = random.nextInt(deck.size());
-			dealtCards.get(position1 % 6).add(deck.get(dealtCard));
-			deck.remove(dealtCard);
+		while(!deck2.isEmpty()) {
+			int dealtCard = random.nextInt(deck2.size());
+			dealtCards.get(position1 % 6).add(deck2.get(dealtCard));
+			deck2.remove(dealtCard);
 			position1++;
 		}
 		
@@ -316,7 +323,10 @@ public class ClueGame extends JFrame{
 	  return item;
 	}
 	
-
+	
+	public static Player getCurrentPLayer(){
+		return currentPlayer;
+	}
 	
 	
 }

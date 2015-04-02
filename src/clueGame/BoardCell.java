@@ -54,4 +54,7 @@ public abstract class BoardCell extends JPanel implements Comparable<BoardCell>{
 			}
 		}
 	}
+	public boolean containsClick(int xt, int yt){
+		return (xt>x*Board.sqsize && xt< (x+1)*Board.sqsize)&& (yt>y*Board.sqsize && yt< (y+1)*Board.sqsize);
+	}
 }

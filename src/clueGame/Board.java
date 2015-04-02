@@ -1,9 +1,13 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+
+import java.awt.Dimension;
+import java.awt.event.MouseEvent;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,11 +26,11 @@ import javax.swing.JPanel;
 
 import clueGame.RoomCell.DoorDirection;
 
-public class Board extends JPanel{
+public class Board extends JPanel implements MouseListener{
 	public static final int sqsize = 35; 
 	private ArrayList<ArrayList<BoardCell>> boardLayout;
 	public static int xDim, yDim;
-	private Map<Character, String> rooms;
+	private static Map<Character, String> rooms;
 	private HashMap<BoardCell, LinkedList<BoardCell>> adjacencies;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
@@ -128,7 +132,7 @@ public class Board extends JPanel{
 		return yDim;
 	}
 
-	public Map<Character, String> getRooms() {
+	public static Map<Character, String> getRooms() {
 		return rooms;
 	}
 
@@ -322,12 +326,38 @@ public class Board extends JPanel{
 			}
 		}
 		
+		
+		
 		for (Player a: ClueGame.players){
 			a.draw(g);
 		}
 	}
 	
-
+	
+	public void mouseClicked(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
+	public void mousePressed(MouseEvent e)  {
+		
+		if (ClueGame.getCurrentPLayer().isHuman()){
+			BoardCell cell = null;
+			for (ArrayList<BoardCell> arr : boardLayout) {
+				for (BoardCell Tcell : arr){
+					if (Tcell.containsClick(e.getX(), e.getY())) {
+						cell = Tcell;
+						break;
+					}
+				}
+				// display some information just to show whether a box was clicked
+				if (targets.contains(cell)) {
+					//move player
+				}
+				else
+					System.out.println("Not a target!");
+			}
+		}
+	}
 }
 
 

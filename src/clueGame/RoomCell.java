@@ -10,7 +10,9 @@ public class RoomCell extends BoardCell {
 		this.x = x;
 		this.y = y;
 		this.roomInitial = roomInitial;
+		
 		this.doorDirection = door;
+		
 	}
 	
 	@Override
@@ -24,6 +26,9 @@ public class RoomCell extends BoardCell {
 
 	public char getInitial() {
 		return roomInitial;
+	}
+	public String getName() {
+		return Board.getRooms().get(roomInitial);
 	}
 	
 	@Override

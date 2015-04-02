@@ -102,5 +102,9 @@ public class Player {
 		g.fillOval((startCol)*Board.sqsize, startRow*Board.sqsize, Board.sqsize-1, Board.sqsize-1);
 	}
 	
+	public boolean isHuman(){
+		return false;
+	}
+	
 
 }

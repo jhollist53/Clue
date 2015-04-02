@@ -10,5 +10,9 @@ public class HumanPlayer extends Player {
 		super(name, color, startCol, startRow);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public boolean isHuman(){
+		return true;
+	}
 
 }

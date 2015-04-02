@@ -1,11 +1,14 @@
 package clueGame;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import clueGame.Card.cardType;
+
 public class ComputerPlayer extends Player {
-	
+	private HashSet<Card> seenCards;
 	private ArrayList<Card> seen =  new ArrayList<Card>();
 	
 	public ComputerPlayer() {
@@ -48,8 +51,24 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public ArrayList<Card> createSuggestion(RoomCell location) {
+		ArrayList<Card> suggest = new ArrayList<Card>();
+		suggest.add(new Card(location.getName(), Card.cardType.ROOM));
 		
-		return new ArrayList<Card>();
+		Random random = new Random();
+		
+		ArrayList<Card> tempdeck = new ArrayList<Card>(ClueGame.getDeck());
+		tempdeck.removeAll(seenCards);
+		int i =0;
+		while(tempdeck.get(i).getType()==Card.cardType.WEAPON){
+			i++;
+		}
+		suggest.add(tempdeck.get(random.nextInt(i)));
+		int j = 0;
+		while(tempdeck.get(i).getType()==Card.cardType.PERSON){
+			j++;
+		}
+		suggest.add(tempdeck.get(random.nextInt(i+j)));
+		return suggest;
 	}
 	
 	public void updateSeen(Card seen) {

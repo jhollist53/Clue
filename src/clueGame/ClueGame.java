@@ -80,11 +80,22 @@ public class ClueGame extends JFrame{
 				board.repaint();
 			}
 			else{
-				//computer player needs to make a move
+				computerMove();
+				board.repaint();
 			}
 		}
 		
 		
+	}
+	
+	private static void computerMove(){
+		int size = board.getTargets().size();
+		int item = new Random().nextInt(size); // In real life, the Random object should be rather more shared than this
+		ArrayList<BoardCell> list = new ArrayList<BoardCell>(board.getTargets());
+		BoardCell temp = list.get(item);
+		currentPlayer.startCol = temp.x;
+		currentPlayer.startRow = temp.y;
+		board.targets = null;
 	}
 
 	private Component cardPanel() {
@@ -189,7 +200,7 @@ public class ClueGame extends JFrame{
 		players.add(Hplayer);
 		currentPlayer = Hplayer;
 		turnFinished = false;
-		cPlayer = 0;
+		cPlayer = 5;
 		for(int i = 1; i < 6; i++) {
 			key = s.nextLine();
 			Player player =  new Player(key, s.nextLine(), Integer.parseInt(s.nextLine()), Integer.parseInt(s.nextLine()));
@@ -285,6 +296,7 @@ public class ClueGame extends JFrame{
 		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
 		game.loadConfigFiles();
 		board.calcAdjacencies();
+		nextPlayer();
 		game.add(game.cardPanel(),BorderLayout.EAST);
 		game.setSize(Board.sqsize*Board.xDim+15, 6*Board.sqsize*Board.yDim/5+Board.sqsize-2);  
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

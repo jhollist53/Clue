@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,11 +22,13 @@ import java.util.Set;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -50,6 +53,53 @@ public class ClueGame extends JFrame{
 		deck = new ArrayList<Card>();
 		rooms = new HashMap<Character, String>();
 		players = new ArrayList<Player>();
+	}
+
+	private Component cardPanel() {
+		JPanel cards = new JPanel();
+		cards.setLayout(new GridLayout(7,1));
+		
+		JPanel panel2 = new JPanel();
+		panel2.setLayout(new GridLayout(4,1));
+		panel2.setBorder(new TitledBorder (new EtchedBorder(), "People"));
+		
+		for (Card c: players.get(0).cards) 
+			if (c.getType() == Card.cardType.PERSON){
+				JTextField a = new JTextField(20);
+				panel2.add(a);
+				a.setText(c.getName());
+				a.setEditable(false);
+				cards.add(panel2);
+			}
+		
+		panel2 = new JPanel();
+		panel2.setLayout(new GridLayout(4,1));
+		panel2.setBorder(new TitledBorder (new EtchedBorder(), "Weapons"));
+		for (Card c: players.get(0).cards) 
+			if (c.getType() == Card.cardType.WEAPON){
+				JTextField a = new JTextField(20);
+				panel2.add(a);
+				a.setText(c.getName());
+				a.setEditable(false);
+				cards.add(panel2);
+			}
+		
+		panel2 = new JPanel();
+		panel2.setLayout(new GridLayout(4,1));
+		panel2.setBorder(new TitledBorder (new EtchedBorder(), "Rooms"));
+		
+		for (Card c: players.get(0).cards) 
+			if (c.getType() == Card.cardType.ROOM){
+				JTextField a = new JTextField(20);
+				panel2.add(a);
+				a.setText(c.getName());
+				a.setEditable(false);
+				cards.add(panel2);
+			}
+		
+		
+		
+		return cards;
 	}
 
 	public Board getBoard () {
@@ -199,6 +249,7 @@ public class ClueGame extends JFrame{
 	public static void main(String[] args) {
 		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
 		game.loadConfigFiles();
+		game.add(game.cardPanel(),BorderLayout.EAST);
 		game.setSize(Board.sqsize*Board.xDim+15, 6*Board.sqsize*Board.yDim/5+Board.sqsize-2);  
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.createFileMenu();

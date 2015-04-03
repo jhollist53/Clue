@@ -38,21 +38,53 @@ public class ClueGame extends JFrame{
 	private static Player currentPlayer;
 	private Map<Character, String> rooms;
 	private String configFile, legendFile;
-	private Board board;
+	private static Board board;
 	public static ArrayList<Player> players;
 	private static ArrayList<Card> deck;
 	private Solution solution;
+	private static int cPlayer;
+	private boolean turnFinished;
+	private static ControlGUI ctrlpanel;
+	private static int roll;
 	
 	public ClueGame(String configFile, String legendFile) {
 		this.configFile = configFile;
 		this.legendFile = legendFile;
 		board = new Board();
 		add(board,BorderLayout.CENTER);
-		add(new ControlGUI(),BorderLayout.SOUTH);
+		ctrlpanel = new ControlGUI();
+		add(ctrlpanel,BorderLayout.SOUTH);
 		
 		deck = new ArrayList<Card>();
 		rooms = new HashMap<Character, String>();
 		players = new ArrayList<Player>();
+	}
+	
+	
+	
+	public static void nextPlayer(){
+		if(true){
+			
+			cPlayer = (cPlayer+1)%players.size();
+			currentPlayer = players.get(cPlayer);
+			ctrlpanel.setWho(currentPlayer.name);
+			
+			Random random = new Random();
+			roll = random.nextInt(6)+1;
+			
+			ctrlpanel.setRoll(roll);
+			
+			board.calcTargets(currentPlayer.startCol, currentPlayer.startRow, roll);
+		
+			if (currentPlayer.isHuman()){
+				board.repaint();
+			}
+			else{
+				//computer player needs to make a move
+			}
+		}
+		
+		
 	}
 
 	private Component cardPanel() {
@@ -155,6 +187,9 @@ public class ClueGame extends JFrame{
 		String key = s.nextLine();
 		HumanPlayer Hplayer =  new HumanPlayer(key, s.nextLine(), Integer.parseInt(s.nextLine()), Integer.parseInt(s.nextLine()));
 		players.add(Hplayer);
+		currentPlayer = Hplayer;
+		turnFinished = false;
+		cPlayer = 0;
 		for(int i = 1; i < 6; i++) {
 			key = s.nextLine();
 			Player player =  new Player(key, s.nextLine(), Integer.parseInt(s.nextLine()), Integer.parseInt(s.nextLine()));
@@ -249,6 +284,7 @@ public class ClueGame extends JFrame{
 	public static void main(String[] args) {
 		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
 		game.loadConfigFiles();
+		board.calcAdjacencies();
 		game.add(game.cardPanel(),BorderLayout.EAST);
 		game.setSize(Board.sqsize*Board.xDim+15, 6*Board.sqsize*Board.yDim/5+Board.sqsize-2);  
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

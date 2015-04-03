@@ -37,6 +37,8 @@ public abstract class BoardCell extends JPanel implements Comparable<BoardCell>{
 	public void draw(Graphics g)
 	{
 		g.setColor(isWalkway()? Color.PINK: Color.ORANGE);
+		if (Board.targets != null && Board.targets.contains(this))
+			g.setColor(Color.green);
 		g.fillRect(x*Board.sqsize, y*Board.sqsize, Board.sqsize-1, Board.sqsize-1);
 		g.setColor(Color.BLUE);
 		if(isDoorway()){

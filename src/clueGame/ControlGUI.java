@@ -2,6 +2,8 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +15,9 @@ import javax.swing.border.TitledBorder;
 
 public class ControlGUI extends JPanel {
 	private JTextField name;
+	private JTextField roll;
+	private JTextField guess;
+	private JTextField result;
 
 	public ControlGUI()
 	{
@@ -38,11 +43,20 @@ public class ControlGUI extends JPanel {
 	}
 	 
 	private JPanel createButtonPanel() {
-		JButton agree = new JButton("Next Player");
-		JButton disagree = new JButton("Make Accusation");
+		JButton nextplayer = new JButton("Next Player");
+		JButton accuse = new JButton("Make Accusation");
 		JPanel panel = new JPanel();
-		panel.add(agree);
-		panel.add(disagree);
+		panel.add(nextplayer);
+		panel.add(accuse);
+		
+		class NextButton implements ActionListener {
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	ClueGame.nextPlayer();
+		    }
+		}
+		nextplayer.addActionListener(new NextButton());
+		  
 		return panel;
 	}
 	private JPanel createOutPanels() {
@@ -52,27 +66,40 @@ public class ControlGUI extends JPanel {
 		
 		JLabel nameLabel = new JLabel("Die Roll:");
 		panel2.add(nameLabel);
-		JTextField a = new JTextField(20);
-		panel2.add(a);
-		a.setEditable(false);
+		roll = new JTextField(20);
+		panel2.add(roll);
+		roll.setEditable(false);
 		panel.add(panel2);
 		
 		nameLabel = new JLabel("Guess: ");
 		panel2.add(nameLabel);
-		a = new JTextField(20);
-		panel2.add(a);
-		a.setEditable(false);
+		guess = new JTextField(20);
+		panel2.add(guess);
+		guess.setEditable(false);
 		panel.add(panel2);
 		
-		nameLabel = new JLabel("Result:");
+		nameLabel = new JLabel("Response:");
 		panel2.add(nameLabel);
-		a = new JTextField(20);
-		panel2.add(a);
-		a.setEditable(false);
+		result = new JTextField(20);
+		panel2.add(result);
+		result.setEditable(false);
 		panel.add(panel2);
 		
 		
 		return panel;
+	}
+	
+	public void setWho(String a){
+		name.setText(a);
+	}
+	public void setRoll(int a){
+		roll.setText(String.valueOf(a));
+	}
+	public void setGuess(Card person, Card weapon, Card Place){
+		guess.setText(person.getName() + " " + weapon.getName() + " " + Place.getName());
+	}
+	public void setResult(Card a){
+		result.setText(a.getName());
 	}
 	
 	/*public static void main(String[] args) {

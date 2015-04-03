@@ -32,7 +32,7 @@ public class Board extends JPanel implements MouseListener{
 	public static int xDim, yDim;
 	private static Map<Character, String> rooms;
 	private HashMap<BoardCell, LinkedList<BoardCell>> adjacencies;
-	private Set<BoardCell> targets;
+	public static Set<BoardCell> targets;
 	private Set<BoardCell> visited;
 	private Graphics gr123;
 	
@@ -211,70 +211,70 @@ public class Board extends JPanel implements MouseListener{
 				adjacencies.put(getCellAt(x,y), ll);
 =======*/
 				LinkedList<BoardCell> adjacencyList = new LinkedList<BoardCell>();
-				if(boardLayout.get(x).get(y).isWalkway()){
+				if(getCellAt(x,y).isWalkway()){
 					checkAdjWalkways(x,y,adjacencyList);
 				}
-				else if(boardLayout.get(x).get(y).isDoorway()){
+				else if(getCellAt(x,y).isDoorway()){
 					checkAdjDoorways(x,y,adjacencyList);
 				}
-				adjacencies.put(boardLayout.get(x).get(y), adjacencyList);
+				adjacencies.put(getCellAt(x,y), adjacencyList);
 //>>>>>>> a9b2d340d3b13dc408550723e2bc17ba4021dc9e
 			}
 		}
 	}
 
-	private LinkedList<BoardCell> checkAdjDoorways(int x, int y,
-			LinkedList<BoardCell> adjacencyList) {
+	private LinkedList<BoardCell> checkAdjDoorways(int x, int y, LinkedList<BoardCell> adjacencyList) {
+		
 		if(y-1 >= 0){
-			if(boardLayout.get(x).get(y-1).isWalkway()) { 
-				adjacencyList.addLast(boardLayout.get(x).get(y-1));
+			if(getCellAt(x,y-1).isWalkway()) { 
+				adjacencyList.addLast(getCellAt(x,y-1));
 			}
 		}
 		if(x+1 < xDim){
-			if(boardLayout.get(x+1).get(y).isWalkway()) {
-				adjacencyList.addLast(boardLayout.get(x+1).get(y));
+			if(getCellAt(x+1,y).isWalkway()) {
+				adjacencyList.addLast(getCellAt(x+1,y));
 			}
 		}
 		if(y+1 < yDim){
-			if(boardLayout.get(x).get(y+1).isWalkway()) {
-				adjacencyList.addLast(boardLayout.get(x).get(y+1));
+			if(getCellAt(x,y+1).isWalkway()) {
+				adjacencyList.addLast(getCellAt(x,y+1));
 			}
 		}
 		if(x-1 >= 0){
-			if(boardLayout.get(x-1).get(y).isWalkway()) {
-				adjacencyList.addLast(boardLayout.get(x-1).get(y));
+			if(getCellAt(x-1,y).isWalkway()) {
+				adjacencyList.addLast(getCellAt(x-1,y));
 			}
 		}
 		return adjacencyList;
-		
+
 	}
 
 	private LinkedList<BoardCell> checkAdjWalkways(int x, int y,
 			LinkedList<BoardCell> adjacencyList) {
-			if(y-1 >= 0){
-				if(boardLayout.get(x).get(y-1).isWalkway() 
-						|| boardLayout.get(x).get(y-1).isDoorway()){
-					adjacencyList.addLast(boardLayout.get(x).get(y-1));
-				}
+		if(y-1 >= 0){
+			if(getCellAt(x,y-1).isWalkway() 
+					|| getCellAt(x,y-1).isDoorway()){
+				adjacencyList.addLast(getCellAt(x,y-1));
 			}
-			if(x+1 < xDim){
-				if(boardLayout.get(x+1).get(y).isWalkway() 
-						|| boardLayout.get(x+1).get(y).isDoorway()){
-					adjacencyList.addLast(boardLayout.get(x+1).get(y));
-				}
+		}
+		if(x+1 < xDim){
+			if(getCellAt(x+1,y).isWalkway() 
+					|| getCellAt(x+1,y).isDoorway()){
+				adjacencyList.addLast(getCellAt(x+1,y));
 			}
-			if(y+1 < yDim){
-				if(boardLayout.get(x).get(y+1).isWalkway() 
-						|| boardLayout.get(x).get(y+1).isDoorway()){
-					adjacencyList.addLast(boardLayout.get(x).get(y+1));
-				}
+		}
+		if(y+1 < yDim){
+			if(getCellAt(x,y+1).isWalkway() 
+					|| getCellAt(x,y+1).isDoorway()){
+				adjacencyList.addLast(getCellAt(x,y+1));
 			}
-			if(x-1 >= 0){
-				if(boardLayout.get(x-1).get(y).isWalkway() 
-						|| boardLayout.get(x-1).get(y).isDoorway()){
-					adjacencyList.addLast(boardLayout.get(x-1).get(y));
-				}
+		}
+		if(x-1 >= 0){
+			if(getCellAt(x-1,y).isWalkway() 
+					|| getCellAt(x-1,y).isDoorway()){
+				adjacencyList.addLast(getCellAt(x-1,y));
 			}
+		}
 		return adjacencyList;
 		
 	}

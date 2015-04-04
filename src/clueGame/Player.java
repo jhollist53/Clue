@@ -16,12 +16,20 @@ public class Player {
 	protected int startCol;
 	protected Color colorColor;
 	protected int startRow;
+	private char lastRoomVisited = 0;
 	
 	public Player() {
 		name = "";
 		color = "";
 		startCol = 0;
 		startRow = 0;
+	}
+	public char getlastRoomVisited(){
+		return lastRoomVisited;
+	}
+	
+	public void setlastRoomVisited(char a){
+		lastRoomVisited = a;
 	}
 	
 	public Player( String name, String color, int startRow, int startCol) {
@@ -55,6 +63,8 @@ public class Player {
 			return null;
 		}
 	}
+	
+	
 
 	public String getName() {
 		return name;

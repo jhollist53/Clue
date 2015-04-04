@@ -1,28 +1,52 @@
 package clueGame;
 
 import java.awt.BorderLayout;
-
-import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.event.MouseListener;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+
+
+
+
+
+
+
+import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.MouseListener;
+import java.util.Arrays;
 
 import clueGame.RoomCell.DoorDirection;
 
@@ -42,7 +66,7 @@ public class Board extends JPanel implements MouseListener{
 		boardLayout = new ArrayList<ArrayList<BoardCell>>();
 		adjacencies = new HashMap<BoardCell, LinkedList<BoardCell>>();
 		rooms = new HashMap<Character, String>(); 
-
+		addMouseListener(this);
 	}
 
 	public void loadBoardConfig (String configFile, Map<Character, String> rooms) {
@@ -334,13 +358,8 @@ public class Board extends JPanel implements MouseListener{
 	}
 	
 	
-	public void mouseClicked(MouseEvent e) {}
-	public void mouseEntered(MouseEvent e) {}
-	public void mouseExited(MouseEvent e) {}
-	public void mouseReleased(MouseEvent e) {}
-	public void mousePressed(MouseEvent e)  {
-		
-		if (ClueGame.getCurrentPLayer().isHuman()){
+	public void mouseClicked(MouseEvent e) {
+		if (targets!= null && ClueGame.getCurrentPLayer().isHuman()){
 			BoardCell cell = null;
 			for (ArrayList<BoardCell> arr : boardLayout) {
 				for (BoardCell Tcell : arr){
@@ -349,14 +368,90 @@ public class Board extends JPanel implements MouseListener{
 						break;
 					}
 				}
-				// display some information just to show whether a box was clicked
-				if (targets.contains(cell)) {
-					//move player
+			}
+			
+			// display some information just to show whether a box was clicked
+			if (targets.contains(cell)) {
+				ClueGame.getCurrentPLayer().startCol = cell.x;
+				ClueGame.getCurrentPLayer().startRow = cell.y;
+				if (cell instanceof RoomCell){
+					suggestionPrompt((RoomCell)cell);
+				}else{
+					ClueGame.turnFinished = true;
 				}
-				else
-					System.out.println("Not a target!");
+				targets = null;
+				repaint();
+			}
+			else{
+				JDialog error = new JDialog();
+				error.setDefaultCloseOperation(error.DISPOSE_ON_CLOSE);
+				error.setLayout(new GridLayout(1,1));
+				error.setBounds(e.getX(), e.getY(), 150, 60);
+				error.setVisible(true);
+				error.setTitle("ERROR");
+				JTextPane message = new JTextPane();
+				message.setEditable(false);
+				message.setText("NOT A VALID SQUARE");
+				error.add(message);
 			}
 		}
+	}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
+	public void mousePressed(MouseEvent e)  {}
+	
+	public void suggestionPrompt(RoomCell p){
+		JDialog sugg = new JDialog();
+		sugg.setDefaultCloseOperation(sugg.DO_NOTHING_ON_CLOSE);
+		sugg.setLayout(new GridLayout(1,3));
+		sugg.setBounds(200, 200, 600, 250);
+		sugg.setTitle("Make a Suggestion!");
+		
+		JComboBox<String> persong = new JComboBox<String>();
+		persong.addItem("Miss Scarlet");
+		persong.addItem("Mr. Green");
+		persong.addItem("Colonel Mustard");
+		persong.addItem("Mrs. Peacock");
+		persong.addItem("Mrs. White");
+		persong.addItem("Professor Plumb");
+		persong.setBorder(new TitledBorder (new EtchedBorder(), "Person: "));
+		sugg.add(persong);
+		
+		JComboBox<String> weapg = new JComboBox<String>();
+		weapg.addItem("Wrench");
+		weapg.addItem("Revolver");
+		weapg.addItem("Candlestick");
+		weapg.addItem("Lead Pipe");
+		weapg.addItem("Rope");
+		weapg.addItem("Knife");
+		weapg.setBorder(new TitledBorder (new EtchedBorder(), "Weapon Guess"));
+	  	sugg.add(weapg);
+	  	
+	  	JButton confirm = new JButton("Confirm!");
+	  	sugg.add(confirm);
+	  	
+		class NextButton implements ActionListener {
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	ArrayList<Card> suggestion = new ArrayList<Card>();
+		    	suggestion.add(new Card(p.getName(), Card.cardType.ROOM));
+		    	suggestion.add(new Card((String) weapg.getSelectedItem(), Card.cardType.WEAPON));
+		    	suggestion.add(new Card((String) persong.getSelectedItem(), Card.cardType.PERSON));
+		    	
+		    	
+		    	ClueGame.ctrlpanel.suggestout(suggestion);
+				ClueGame.checkSuggestion(suggestion);
+		    	persong.getSelectedItem();
+		    	
+		    	sugg.dispose();
+		    	ClueGame.turnFinished = true;
+		    }
+		}
+		confirm.addActionListener(new NextButton());
+		sugg.setVisible(true);
+		
+		
 	}
 }
 

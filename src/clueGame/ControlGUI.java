@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -73,7 +74,7 @@ public class ControlGUI extends JPanel {
 		
 		nameLabel = new JLabel("Guess: ");
 		panel2.add(nameLabel);
-		guess = new JTextField(20);
+		guess = new JTextField(25);
 		panel2.add(guess);
 		guess.setEditable(false);
 		panel.add(panel2);
@@ -101,6 +102,18 @@ public class ControlGUI extends JPanel {
 	public void setResult(Card a){
 		result.setText(a.getName());
 	}
+
+	public void suggestout(ArrayList<Card> suggestion) {
+		guess.setText(suggestion.get(0).getName() +", "+ suggestion.get(1).getName() +", "+ suggestion.get(2).getName());
+		
+	}
+	public void clearGuess() {
+		guess.setText("");
+	}
+	public void clearResult() {
+		result.setText("");
+	}
+	
 	
 	/*public static void main(String[] args) {
 		ControlGUI gui = new ControlGUI();	

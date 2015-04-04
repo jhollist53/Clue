@@ -29,6 +29,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -43,8 +44,8 @@ public class ClueGame extends JFrame{
 	private static ArrayList<Card> deck;
 	private Solution solution;
 	private static int cPlayer;
-	private boolean turnFinished;
-	private static ControlGUI ctrlpanel;
+	public static boolean turnFinished;
+	static ControlGUI ctrlpanel;
 	private static int roll;
 	
 	public ClueGame(String configFile, String legendFile) {
@@ -58,13 +59,18 @@ public class ClueGame extends JFrame{
 		deck = new ArrayList<Card>();
 		rooms = new HashMap<Character, String>();
 		players = new ArrayList<Player>();
+		
+		turnFinished = true;
 	}
 	
 	
 	
 	public static void nextPlayer(){
-		if(true){
-			
+		if(turnFinished){
+			turnFinished = false;
+			ctrlpanel.clearGuess();
+			ctrlpanel.clearResult();
+
 			cPlayer = (cPlayer+1)%players.size();
 			currentPlayer = players.get(cPlayer);
 			ctrlpanel.setWho(currentPlayer.name);
@@ -81,21 +87,71 @@ public class ClueGame extends JFrame{
 			}
 			else{
 				computerMove();
+				turnFinished = true;
 				board.repaint();
 			}
+		}
+		else{
+			JDialog error = new JDialog();
+			error.setDefaultCloseOperation(error.DISPOSE_ON_CLOSE);
+			error.setLayout(new GridLayout(1,1));
+			error.setBounds(400, 400, 150, 60);
+			error.setVisible(true);
+			error.setTitle("ERROR");
+			JTextPane message = new JTextPane();
+			message.setEditable(false);
+			message.setText("Finish Your Turn");
+			error.add(message);
 		}
 		
 		
 	}
 	
 	private static void computerMove(){
+
 		int size = board.getTargets().size();
-		int item = new Random().nextInt(size); // In real life, the Random object should be rather more shared than this
+		int item = new Random().nextInt(size);
 		ArrayList<BoardCell> list = new ArrayList<BoardCell>(board.getTargets());
-		BoardCell temp = list.get(item);
-		currentPlayer.startCol = temp.x;
-		currentPlayer.startRow = temp.y;
+		BoardCell temp = null;
+		for (BoardCell a:list){
+			if(a.isDoorway() && ((RoomCell)a).getInitial() != currentPlayer.getlastRoomVisited()){
+				temp = a;
+				currentPlayer.setlastRoomVisited(((RoomCell)a).getInitial());
+				break;
+			}
+		}
+		if (temp == null){
+			temp = list.get(item);
+			currentPlayer.startCol = temp.x;
+			currentPlayer.startRow = temp.y;
+		}else{
+			currentPlayer.startCol = temp.x;
+			currentPlayer.startRow = temp.y;
+			ArrayList<Card> suggestion = ((ComputerPlayer)currentPlayer).createSuggestion((RoomCell) temp);
+			ctrlpanel.suggestout(suggestion);
+			checkSuggestion(suggestion);
+			
+		}
 		board.targets = null;
+		
+		
+	}
+	
+	public static void checkSuggestion(ArrayList<Card> suggestion){
+		int otherPlayers = cPlayer;
+		Card temp = null;
+		for (int i = 1; i<6; i ++){
+			temp = players.get((otherPlayers+i)%6).disproveSuggestion(suggestion.get(2), suggestion.get(1), suggestion.get(0));
+			if (temp != null){
+				break;
+			}
+		}
+		if (temp != null){
+			ctrlpanel.setResult(temp);
+			for (int i = 1;i<6;i++){
+				((ComputerPlayer)players.get(i)).updateSeen(temp);
+			}
+		}
 	}
 
 	private Component cardPanel() {
@@ -199,11 +255,10 @@ public class ClueGame extends JFrame{
 		HumanPlayer Hplayer =  new HumanPlayer(key, s.nextLine(), Integer.parseInt(s.nextLine()), Integer.parseInt(s.nextLine()));
 		players.add(Hplayer);
 		currentPlayer = Hplayer;
-		turnFinished = false;
 		cPlayer = 5;
 		for(int i = 1; i < 6; i++) {
 			key = s.nextLine();
-			Player player =  new Player(key, s.nextLine(), Integer.parseInt(s.nextLine()), Integer.parseInt(s.nextLine()));
+			ComputerPlayer player =  new ComputerPlayer(key, s.nextLine(), Integer.parseInt(s.nextLine()), Integer.parseInt(s.nextLine()));
 			players.add(player);
 		}
 				
@@ -245,6 +300,18 @@ public class ClueGame extends JFrame{
 		for (int i = 0; i < 6; i++) {
 			dealtCards.add(new HashSet<Card>());
 		}
+		
+		//make soultion
+		int person,place,weapon;
+		weapon = random.nextInt(6);
+		person = random.nextInt(6)+5;
+		place = random.nextInt(9)+10;
+		
+		solution = new Solution(deck2.get(person+1).getName(),deck2.get(weapon).getName(),deck2.get(place+2).getName());
+		deck.remove(weapon);
+		deck.remove(person);
+		deck.remove(place);
+		
 		
 		while(!deck2.isEmpty()) {
 			int dealtCard = random.nextInt(deck2.size());

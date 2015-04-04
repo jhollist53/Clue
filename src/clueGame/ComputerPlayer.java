@@ -10,9 +10,11 @@ import clueGame.Card.cardType;
 public class ComputerPlayer extends Player {
 	private HashSet<Card> seenCards;
 	private ArrayList<Card> seen =  new ArrayList<Card>();
+	private char lastRoomVisited;
 	
 	public ComputerPlayer() {
 		super();
+		seenCards = new HashSet<Card>();
 	}
 
 	public ComputerPlayer(String name, String color, int startCol, int startRow) {
@@ -25,9 +27,8 @@ public class ComputerPlayer extends Player {
 		lastRoomVisited = lastRoom;
 	}
 
-	private char lastRoomVisited;
 	
-	public BoardCell pickLocation( Set<BoardCell> targets) {
+	public void pickLocation( Set<BoardCell> targets) {
 		Random rnd = new Random();
 		ArrayList<BoardCell> possibleRoomLocations = new ArrayList<BoardCell>();
 		ArrayList<BoardCell> possibleWalkwayLocations = new ArrayList<BoardCell>();
@@ -43,10 +44,11 @@ public class ComputerPlayer extends Player {
 		}
 		
 		if (!possibleRoomLocations.isEmpty()) {
-			return possibleRoomLocations.get(rnd.nextInt(possibleRoomLocations.size()));
+			startCol = possibleRoomLocations.get(rnd.nextInt(possibleRoomLocations.size())).x;
 		} else {
-			return possibleWalkwayLocations.get(rnd.nextInt(possibleWalkwayLocations.size()));
+			startRow =  possibleWalkwayLocations.get(rnd.nextInt(possibleWalkwayLocations.size())).y;
 		}
+		
 
 	}
 	
@@ -57,6 +59,10 @@ public class ComputerPlayer extends Player {
 		Random random = new Random();
 		
 		ArrayList<Card> tempdeck = new ArrayList<Card>(ClueGame.getDeck());
+		if (seenCards == null){
+			seenCards = new HashSet<Card>();
+		}
+		
 		tempdeck.removeAll(seenCards);
 		int i =0;
 		while(tempdeck.get(i).getType()==Card.cardType.WEAPON){
@@ -64,10 +70,12 @@ public class ComputerPlayer extends Player {
 		}
 		suggest.add(tempdeck.get(random.nextInt(i)));
 		int j = 0;
-		while(tempdeck.get(i).getType()==Card.cardType.PERSON){
+		while(tempdeck.get(i+j).getType()==Card.cardType.PERSON){
 			j++;
 		}
-		suggest.add(tempdeck.get(random.nextInt(i+j)));
+
+		
+		suggest.add(tempdeck.get(random.nextInt(j)+i));
 		return suggest;
 	}
 	

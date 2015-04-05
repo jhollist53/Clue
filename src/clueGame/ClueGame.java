@@ -399,7 +399,7 @@ public class ClueGame extends JFrame{
 	  people.add(new JRadioButton("Colonel Mustard"));
 	  people.add(new JRadioButton("Mrs. Peacock"));
 	  people.add(new JRadioButton("Mrs. White"));
-	  people.add(new JRadioButton("Professor Plumb"));
+	  people.add(new JRadioButton("Professor Plum"));
 	  people.setBorder(new TitledBorder (new EtchedBorder(), "People"));
 	  notes.add(people);
 	  

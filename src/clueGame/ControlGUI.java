@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -30,7 +31,7 @@ public class ControlGUI extends JPanel {
 		add(panel);
 		panel = createButtonPanel();
 		add(panel);
-	}
+		JOptionPane.showMessageDialog(panel, "You are Mrs. Peacock, begin playing by making your move!", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);	}
 
 	 private JPanel createWhoseTurnPanel() {
 		 	JPanel panel = new JPanel();

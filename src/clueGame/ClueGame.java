@@ -387,7 +387,7 @@ public class ClueGame extends JFrame{
 	{
 	  JMenuItem item = new JMenuItem("Notes");
 	  
-	  JDialog notes = new JDialog();
+	  final JDialog notes = new JDialog();
 	  notes.setDefaultCloseOperation(HIDE_ON_CLOSE);
 	  notes.setLayout(new GridLayout(3,3));
 	  notes.setBounds(1000, 200, 600, 600);

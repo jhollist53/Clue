@@ -401,14 +401,14 @@ public class Board extends JPanel implements MouseListener{
 	public void mouseReleased(MouseEvent e) {}
 	public void mousePressed(MouseEvent e)  {}
 	
-	public void suggestionPrompt(RoomCell p){
-		JDialog sugg = new JDialog();
+	public void suggestionPrompt(final RoomCell p){
+		final JDialog sugg = new JDialog();
 		sugg.setDefaultCloseOperation(sugg.DO_NOTHING_ON_CLOSE);
 		sugg.setLayout(new GridLayout(1,3));
 		sugg.setBounds(200, 200, 600, 250);
 		sugg.setTitle("Make a Suggestion!");
 		
-		JComboBox<String> persong = new JComboBox<String>();
+		final JComboBox<String> persong = new JComboBox<String>();
 		persong.addItem("Miss Scarlet");
 		persong.addItem("Mr. Green");
 		persong.addItem("Colonel Mustard");
@@ -418,7 +418,7 @@ public class Board extends JPanel implements MouseListener{
 		persong.setBorder(new TitledBorder (new EtchedBorder(), "Person: "));
 		sugg.add(persong);
 		
-		JComboBox<String> weapg = new JComboBox<String>();
+		final JComboBox<String> weapg = new JComboBox<String>();
 		weapg.addItem("Wrench");
 		weapg.addItem("Revolver");
 		weapg.addItem("Candlestick");

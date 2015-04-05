@@ -1,0 +1,405 @@
+commit a9b2d340d3b13dc408550723e2bc17ba4021dc9e
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Mon Mar 30 20:14:50 2015 -0600
+
+    Refactored calcAdjacencies and included a text file with before and after segments
+
+commit c7d24847cd9562cd97eacf84a03ff8da5ae0e692
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Mon Mar 30 18:50:59 2015 -0600
+
+    Refactored to remove unnecessary test code
+
+commit 73312ee24becfbdce18365c7eae87e65c2695897
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Mon Mar 30 18:48:10 2015 -0600
+
+    Refactored name ll to be adjacencyList
+
+commit b479c4e49b6df0acd8ebaeadbaa243447a2da813
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Mon Mar 30 18:41:29 2015 -0600
+
+    Refactored clueGame for inline declarations
+
+commit ea4a72a22433e204c748d11a6f462675e3ba8ce6
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Sun Mar 29 22:40:41 2015 -0600
+
+    Refactor Changed file location
+
+commit bfcb32a85702369cf25fee4d180b5d8f9f1faa6d
+Author: William Byrd <wbyrd@mymail.mines.edu>
+Date:   Sun Mar 29 13:32:45 2015 -0600
+
+    Refactor and removed board transpose, now reads file in correctly
+
+commit fea238efb407bc165c967bebfaed356c8d2220f3
+Author: William Byrd <wbyrd@mymail.mines.edu>
+Date:   Thu Mar 26 11:36:29 2015 -0600
+
+    Refactored to Combine Control and Board GUI
+
+commit 2879e153198784d2b9a733606e7ca351d7924ca9
+Author: William Byrd <wbyrd@mymail.mines.edu>
+Date:   Thu Mar 26 10:51:03 2015 -0600
+
+    Refactored to change multiple files
+
+commit 83cf5deb8e5474acd5a070aa4b18fffff0445360
+Author: Connor Holmes <cmikeh2@gmail.com>
+Date:   Tue Mar 17 23:29:35 2015 -0600
+
+    Configured necessary classes for testing to be error free. Added testing for a ComputerPlayer creating a suggestion.
+
+commit 02e8fd098662c22aee3eb4f352dbc7c07eee47cf
+Author: Connor Holmes <cmikeh2@gmail.com>
+Date:   Tue Mar 17 23:09:53 2015 -0600
+
+    Fixed bugs in test file. Implemented the handling of suggestions.
+
+commit 1736c73e19952b7c17493ef69b1b8ec1eaa5c679
+Author: Connor Holmes <cmikeh2@gmail.com>
+Date:   Tue Mar 17 22:57:40 2015 -0600
+
+    Modify all player classes and the game class to accept cards instead of strings. Add necessary setters for testing. Failing tests for all suggestions implemented.
+
+commit b6999e9228a5278d13221c01132de9f12382a925
+Author: Connor Holmes <cmikeh2@gmail.com>
+Date:   Tue Mar 17 21:56:48 2015 -0600
+
+    Fix minor bugs with the spreadsheet in the test file. Added getters in BoardCell for debugging purposes. ComputerPlayer method pickLocation implemented.
+
+commit 18864cb949d3f6c80cd481ee4df7557e42debfdd
+Author: Connor Holmes <cmikeh2@gmail.com>
+Date:   Tue Mar 17 21:25:51 2015 -0600
+
+    Modify computer player such that tests could be written without triggering errors. Modify WalkwayCell to have a default constructor. Create all failing tests for a ComputerPlayer using PickLocation.
+
+commit d9626e71086598795bcfa9166ca1942602a93ebd
+Author: Connor Holmes <cmikeh2@gmail.com>
+Date:   Tue Mar 17 20:46:05 2015 -0600
+
+    Add Getters for testing purposes into the Solution class. Implement checkAccusation and verified to function.
+
+commit 1e37c4d27c317390531aa0238d8ae44ab005e8c1
+Author: Connor Holmes <cmikeh2@gmail.com>
+Date:   Tue Mar 17 20:42:08 2015 -0600
+
+    Change checkAccusation to a boolean function. Add constructor for Solution class. Create failing tests for checkAccusation
+
+commit 31f37005877c7060b7c1fe6dc3a45b026e6b6e9b
+Author: Connor Holmes <cmikeh2@gmail.com>
+Date:   Tue Mar 17 17:17:32 2015 -0600
+
+    Tests finished. Passing code created. Players and cards modified to match game more completely.
+
+commit 6a3d3231011e7766ddc84a19c56b0d9532362237
+Author: Connor Holmes <cmikeh2@gmail.com>
+Date:   Tue Mar 17 15:28:48 2015 -0600
+
+    Add tests for loading players from file and loading the deck from a file. Actual configuration files created.
+
+commit 4b647ea0be5a2407c718b33259279962220dbe79
+Author: Connor Holmes <cmikeh2@gmail.com>
+Date:   Mon Mar 16 21:42:12 2015 -0600
+
+    Organize tests into new package, create skeleton classes and methods for Player and Cards, and create empty methods in board.
+
+commit 2f5efc019adf8def1cefa1c7aa027ba4e6e61121
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Wed Feb 25 07:50:36 2015 -0700
+
+    Passing all tests
+
+commit fd2ed5fdcd71708014fe8c425154cec72ffa1bd9
+Merge: db49a5e 92d4d78
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Wed Feb 25 07:20:54 2015 -0700
+
+    Passing target tests
+
+commit db49a5e6536d0ed12262cc8981fa004b0172547b
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Wed Feb 25 07:16:16 2015 -0700
+
+    Updated targets tests to pass
+
+commit 92d4d787327cf954c4a3d7ab93c40ddb38a5850c
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Wed Feb 25 00:09:37 2015 -0700
+
+    fixed target2
+
+commit 2ab0ac609deb28593d152effd0d86cc79f900220
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Wed Feb 25 00:00:43 2015 -0700
+
+    fixed targetting bugs
+
+commit 87a5c5b2a2a891dda83001e42dd7a34db21653b2
+Merge: 7a308c5 8685e75
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Tue Feb 24 23:34:03 2015 -0700
+
+    Merge branch 'master' of https://github.com/mprussak/clue-game.git
+
+commit 8685e75609974b7b6c79a7c2351ad4157214e9d1
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Tue Feb 24 23:32:52 2015 -0700
+
+    fixed imports
+
+commit 5323335b0e8d4ad8c5ea3cd055c4ad86afa68bf7
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Tue Feb 24 23:31:06 2015 -0700
+
+    added target calculations
+
+commit 7a308c55561da057d507e97d8cb5580897f2c4ba
+Merge: 7f022eb 43066cd
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Tue Feb 24 23:31:03 2015 -0700
+
+    Merge branch 'master' of https://github.com/mprussak/clue-game
+    
+    Conflicts:
+    	src/clueGame/Board.java
+
+commit 7f022ebd07b380e9a5b9f843d6286f20560300ba
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Tue Feb 24 23:29:59 2015 -0700
+
+    Changed
+
+commit 6aed60590fe6e670a8797f63012bccd789e3a2b4
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Tue Feb 24 23:22:36 2015 -0700
+
+    finished adjacency calculations
+
+commit 43066cde6fb2b2d965e6ad45f80094788d419f39
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Tue Feb 24 23:12:15 2015 -0700
+
+    made adjInRoom and adjDoor pass
+
+commit 59c53241a86a0674d5bba3b333fd8cd04daa5b4e
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Tue Feb 24 14:06:11 2015 -0700
+
+    Changed imports
+
+commit e91620f883898e458d2eef04c0cb708e9bd6f8b3
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Tue Feb 24 12:58:56 2015 -0700
+
+    began implementing adjecency tests.
+
+commit 77a564956c147ad29e039cc3c5a2f20000469653
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sun Feb 22 15:20:47 2015 -0700
+
+    fixed excel spreadsheet
+
+commit 73a6fe850fa081e33f41535a84c79278bb167f0d
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sun Feb 22 15:20:16 2015 -0700
+
+    updated tests, plotted test cells on excel spreadsheet
+
+commit 4619cf7de969a6f69cc44b4b1fdb8d692f166379
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sun Feb 22 13:11:02 2015 -0700
+
+    began updating excel file
+
+commit 3900a74ca29d9f5c26e3437d7ceb5fcded96d4bb
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Sun Feb 22 11:41:06 2015 -0700
+
+    Updating testing files
+
+commit 113f591fb9041cd01f80bf909f5e99ac2baffe9c
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Sat Feb 21 23:43:10 2015 -0700
+
+    Add new Tests
+
+commit 10ce70e7332e0b60c81c49c35c7b0d0cce13d69c
+Merge: 9a50665 aea4a7b
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 22:51:43 2015 -0700
+
+    Merge branch 'master' of https://github.com/mprussak/clue-game
+
+commit 9a506651490bcd40dc4dea652d531ada3b283f63
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 22:51:08 2015 -0700
+
+    more work on exceptions
+
+commit aea4a7ba2cb4f5a211493fed4b656e937b1099ba
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Sat Feb 21 22:50:47 2015 -0700
+
+    Updating tests
+
+commit ce503d2fb326d00afbacb379907a4456491d2849
+Merge: 7c13e59 d24b57f
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 22:34:46 2015 -0700
+
+    Merge branch 'troubleshoot'
+
+commit 7c13e597d45823379092723c56e4ef8897c9e18a
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Sat Feb 21 22:31:07 2015 -0700
+
+    Updated CR's files
+
+commit d24b57f5792a769dfd7f34d09a82a746f0fd3546
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 22:19:24 2015 -0700
+
+    fixed doorDirection method
+
+commit 5e27037aeba4497a6e296b3313be09a2d0b31a92
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Sat Feb 21 21:51:40 2015 -0700
+
+    Fixed numDoors test and modified doorDirections
+
+commit 97c7614caf57946d2ff474b827e21fc665cedf2a
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 18:30:21 2015 -0700
+
+    got bad layout exceptions working properly
+
+commit ef13f9c2d1ea83386e197099ec27896a8607d620
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 18:06:13 2015 -0700
+
+    updated exception handling
+
+commit 8eba487bab637ec5c09c42fec65448384eb43d73
+Merge: c25920d cf0ea05
+Author: mprussak <marek@theprussaks.com>
+Date:   Sat Feb 21 18:05:21 2015 -0700
+
+    Merge branch 'troubleshooting'
+
+commit cf0ea05094756f3b5a2cb2b9f3af345b8143d942
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 18:04:35 2015 -0700
+
+    updated tests
+
+commit c25920dec26178ba56669b6e0b73b48fba3ee6a0
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 17:12:45 2015 -0700
+
+    fixed layout reader
+
+commit f2055375c753176a43eb44a3dc5629a1de12f1ab
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 17:05:08 2015 -0700
+
+    fixed layout reader
+
+commit 8302abe5d5fb7a5872c15e0e224fa75038df6056
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 16:09:48 2015 -0700
+
+    fixed cell index calculation
+
+commit 83a6d454f09e3a828827a9661d49720d1a48c303
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 15:46:43 2015 -0700
+
+    added calls to config loaders
+
+commit 2929c4c1f92ce1500b2beb66157f2cd684230c76
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 15:26:50 2015 -0700
+
+    fixed tests
+
+commit e77c23bd7e9359707d6c99ece1be6f14d5ce7adc
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 15:22:20 2015 -0700
+
+    updated getters
+
+commit 65772ca823312ee6f5c9f72e16f4b89e128536a8
+Merge: 88e3971 42ed0be
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 15:19:44 2015 -0700
+
+    merged work
+
+commit 42ed0bea69d826612f7970d5f366737927a48ea8
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Sat Feb 21 15:08:48 2015 -0700
+
+    Modified getCell
+
+commit 88e39718b835c7c8a9efffc8f76978668a72d58d
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 15:08:02 2015 -0700
+
+    updated board layout loading
+
+commit e637c24e97aa2cb5bfb6abd5b1037d7fde5d7be6
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Sat Feb 21 14:30:11 2015 -0700
+
+    cleaned up resources
+
+commit 56bde3775f3d5b6b1fd77d2ca504ed3fe2f33730
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Fri Feb 20 00:17:15 2015 -0700
+
+    implemented config file parsing
+
+commit 9a48f15e3f8f9d8d1df9695a778580fbfe149b70
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Thu Feb 19 22:31:39 2015 -0700
+
+    added tests and config files from teacher
+
+commit e051a7c4c9323bf2c6a0119c6fc87803c898e955
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Thu Feb 19 21:26:54 2015 -0700
+
+    Failing Tests added
+
+commit 02960c062f48e076959c14cebe300f9c55a91091
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Thu Feb 19 12:12:20 2015 -0700
+
+    Tests added
+
+commit 27fd0029e0fe062c70df79ad98514e7a677a740c
+Author: Jacob Hollister <jhollist@mymail.mines.edu>
+Date:   Thu Feb 19 11:39:08 2015 -0700
+
+    Added new package
+
+commit 3eeabcf5abbb6342952743646d32384cb7de5f74
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Thu Feb 19 11:29:58 2015 -0700
+
+    added readme
+
+commit efe49496f3f76210934bdc6d1fd2963808cad0d4
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Thu Feb 19 11:26:52 2015 -0700
+
+    fixed targetting logic, updated tests accordingly
+
+commit 0896c58c8bf51f89f9c036f54702d37de1cd949a
+Author: Marek Prussak <marek@theprussaks.com>
+Date:   Thu Feb 19 11:16:28 2015 -0700
+
+    initial commit

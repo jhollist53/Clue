@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -15,10 +16,6 @@ public class ComputerPlayer extends Player {
 	public ComputerPlayer() {
 		super();
 		seenCards = new HashSet<Card>();
-	}
-
-	public HashSet<Card> getSeenCards() {
-		return seenCards;
 	}
 
 	public ComputerPlayer(String name, String color, int startCol, int startRow) {
@@ -90,6 +87,10 @@ public class ComputerPlayer extends Player {
 	//For testing purpose only.
 	public void setLastRoomVisited(char l) {
 		lastRoomVisited = l;
+	}
+
+	public HashSet<Card>  getSeenCards() {
+		return seenCards;
 	}
 	
 }

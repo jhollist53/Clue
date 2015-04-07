@@ -107,8 +107,7 @@ public class ClueGame extends JFrame{
 	}
 
 	private static void computerMove(){
-			/*int unseenCards = deck.size() - ((ComputerPlayer) currentPlayer).getSeenCards().size();
-			if (unseenCards == 3) {
+			/*if (deck.containsAll(((ComputerPlayer) currentPlayer).getSeenCards()))  {
 				String weaponGuess = null, personGuess = null, roomGuess = null;
 				ArrayList<Card> tempdeck = new ArrayList<Card>(ClueGame.getDeck());
 				tempdeck.removeAll(((ComputerPlayer) currentPlayer).getSeenCards());

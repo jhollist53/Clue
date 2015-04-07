@@ -107,7 +107,32 @@ public class ClueGame extends JFrame{
 	}
 
 	private static void computerMove(){
-
+			/*int unseenCards = deck.size() - ((ComputerPlayer) currentPlayer).getSeenCards().size();
+			if (unseenCards == 3) {
+				String weaponGuess = null, personGuess = null, roomGuess = null;
+				ArrayList<Card> tempdeck = new ArrayList<Card>(ClueGame.getDeck());
+				tempdeck.removeAll(((ComputerPlayer) currentPlayer).getSeenCards());
+				for (Card c : tempdeck) {
+					if (c.getType() == Card.cardType.WEAPON) {
+						weaponGuess = c.getName();
+					}
+					if (c.getType() == Card.cardType.PERSON) {
+						personGuess = c.getName();
+					}
+					if (c.getType() == Card.cardType.ROOM) {
+						roomGuess = c.getName();
+					}
+				}
+				Solution guess = new Solution(personGuess, weaponGuess, roomGuess);
+				if (checkAccusation(guess)) {
+				JOptionPane.showMessageDialog(null, currentPlayer.getName()
+						+ " guessed correctly. The answer was " + personGuess + " in the "
+						+ roomGuess + " with the " + weaponGuess, currentPlayer.getName() + " wins!",
+						JOptionPane.INFORMATION_MESSAGE);
+				System.exit(0);
+				}
+			}
+			*/
 		int size = board.getTargets().size();
 		int item = new Random().nextInt(size);
 		ArrayList<BoardCell> list = new ArrayList<BoardCell>(board.getTargets());

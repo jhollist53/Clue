@@ -31,7 +31,8 @@ public class ControlGUI extends JPanel {
 		add(panel);
 		panel = createButtonPanel();
 		add(panel);
-		JOptionPane.showMessageDialog(panel, "You are Mrs. Peacock, begin playing by making your move!", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);	}
+		JOptionPane.showMessageDialog(panel, "You are Mrs. Peacock, begin playing by making your move!", "Welcome to Clue!", JOptionPane.INFORMATION_MESSAGE);	
+	}
 
 	 private JPanel createWhoseTurnPanel() {
 		 	JPanel panel = new JPanel();

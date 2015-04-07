@@ -350,7 +350,15 @@ public class Board extends JPanel implements MouseListener{
 			}
 		}
 		
-		
+		g.drawString("Ballroom", 50, 100);
+		g.drawString("Study", 250, 680);
+		g.drawString("Conservatory", 800, 400);
+		g.drawString("Hall", 550, 550);
+		g.drawString("Billiards Room", 50, 350);
+		g.drawString("Lounge", 800, 700);
+		g.drawString("Kitchen", 800, 100);
+		g.drawString("Dining Room", 400, 100);
+		g.drawString("Library", 50, 600);
 		
 		for (Player a: ClueGame.players){
 			a.draw(g);

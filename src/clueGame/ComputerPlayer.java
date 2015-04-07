@@ -17,6 +17,10 @@ public class ComputerPlayer extends Player {
 		seenCards = new HashSet<Card>();
 	}
 
+	public HashSet<Card> getSeenCards() {
+		return seenCards;
+	}
+
 	public ComputerPlayer(String name, String color, int startCol, int startRow) {
 		super(name, color, startCol, startRow);
 		lastRoomVisited = 'X';

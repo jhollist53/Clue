@@ -23,7 +23,4 @@ public class Solution {
 	public String getRoom() {
 		return room;
 	}
-	
-	
-
 }

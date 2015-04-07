@@ -58,6 +58,14 @@ public class ControlGUI extends JPanel {
 		    }
 		}
 		nextplayer.addActionListener(new NextButton());
+		
+		class AccuseButton implements ActionListener {
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	ClueGame.makeAccusation();
+		    }
+		}
+		accuse.addActionListener(new AccuseButton());
 		  
 		return panel;
 	}

@@ -422,7 +422,7 @@ public class Board extends JPanel implements MouseListener{
 		persong.addItem("Colonel Mustard");
 		persong.addItem("Mrs. Peacock");
 		persong.addItem("Mrs. White");
-		persong.addItem("Professor Plumb");
+		persong.addItem("Professor Plum");
 		persong.setBorder(new TitledBorder (new EtchedBorder(), "Person: "));
 		sugg.add(persong);
 		

@@ -107,7 +107,7 @@ public class ClueGame extends JFrame{
 	}
 
 	private static void computerMove(){
-			/*if (deck.containsAll(((ComputerPlayer) currentPlayer).getSeenCards()))  {
+			if (deck.containsAll(((ComputerPlayer) currentPlayer).getSeenCards()))  {
 				String weaponGuess = null, personGuess = null, roomGuess = null;
 				ArrayList<Card> tempdeck = new ArrayList<Card>(ClueGame.getDeck());
 				tempdeck.removeAll(((ComputerPlayer) currentPlayer).getSeenCards());
@@ -131,7 +131,7 @@ public class ClueGame extends JFrame{
 				System.exit(0);
 				}
 			}
-			*/
+			
 		int size = board.getTargets().size();
 		int item = new Random().nextInt(size);
 		ArrayList<BoardCell> list = new ArrayList<BoardCell>(board.getTargets());
@@ -163,6 +163,12 @@ public class ClueGame extends JFrame{
 	public static void checkSuggestion(ArrayList<Card> suggestion){
 		int otherPlayers = cPlayer;
 		Card temp = null;
+		for (Player p: players){
+			if (p.getName().equals(suggestion.get(2).getName())){
+				p.startCol = currentPlayer.getStartCol();
+				p.startRow = currentPlayer.getStartRow();
+			}
+		}
 		for (int i = 1; i<6; i ++){
 			temp = players.get((otherPlayers+i)%6).disproveSuggestion(suggestion.get(2), suggestion.get(1), suggestion.get(0));
 			if (temp != null){
@@ -172,7 +178,7 @@ public class ClueGame extends JFrame{
 		if (temp != null){
 			ctrlpanel.setResult(temp);
 			for (int i = 1;i<6;i++){
-				((ComputerPlayer)players.get(i)).updateSeen(temp);
+					((ComputerPlayer)players.get(i)).updateSeen(temp);
 			}
 		}
 	}
